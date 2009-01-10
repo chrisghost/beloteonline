@@ -1,5 +1,5 @@
 #include "Client.h"
-
+#include "netstruct.h"
 
 Client::Client(unsigned short Port)
 {
@@ -11,28 +11,26 @@ Client::Client(unsigned short Port)
     }
     while (!ServerAddress.IsValid());
 	
-    if (!Client.Connect(Port, ServerAddress))
+    if (!sClient.Connect(Port, ServerAddress))
         return;
     cout << "Connected to server " << ServerAddress << endl;
 
 }
 
 bool Client::Connexion(string login, string mdp){
-	login pLogin;
-	pLogin.log = login;
-	pLogin.mdp = mdp;
+    struct login plogin{login, mdp};
 	
     sf::Packet RegularPacket;
-    RegularPacket << pLogin;
-    if (Client.Send(RegularPacket) != sf::Socket::Done)
+    RegularPacket << plogin;
+    if (sClient.Send(RegularPacket) != sf::Socket::Done)
         return;
 
     std::cout << "Login sent : " << std::endl;
-    std::cout << pLogin.log << ":" << pLogin.mdp << endl;
+    std::cout << plogin.log << ":" << plogin.mdp << endl;
 	
 }
 
 Client::~Client()
 {
-	Client.Close();
+	sClient.Close();
 }
