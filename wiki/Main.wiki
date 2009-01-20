@@ -3,11 +3,6 @@
 = Cas d'utilisation =
 Les cas d'utilisation:
   * Connexion
-  * Inscription
-  * Créer partie
-  * Rechercher partie
-  * Joindre partie
-  * Lancement de la partie
 En jeu:
   * Jouer carte
   * Lancer une partie
