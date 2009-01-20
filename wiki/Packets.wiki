@@ -1,0 +1,79 @@
+#summary Description des packets clients et serveur
+
+{{{
+struct PrincipalPacketClient
+{
+
+int id;
+
+	struct connexion
+	{
+		string login;
+	};
+
+	struct carte{
+		valeur val;
+		couleur coul;
+		int id_joueur;
+	};
+
+	struct reponse{
+		bool rep;
+	};
+
+	struct choixAttout{
+		couleur attout;
+	};
+
+};
+
+struct PrincipalPacketServer{
+
+int id;
+
+	struct joueur
+	{
+		int id;
+		string login;
+	};
+
+	struct message
+	{
+		string message;
+	};
+
+	struct carte
+	{
+		valeur val;
+		couleur coul;
+	};
+
+	struct demande
+	{
+		int type; //1- prendre carte; 2- attout?; 3- joueur carte
+	};
+
+	struct attout
+	{
+		couleur coul;
+	};
+
+	struct validation // Certainement inutile car déjà intégré dans la SFML
+	{
+		bool valid;
+	};
+
+	struct cartes
+	{
+		int nb_cartes;//nombre de cartes dans le tableau
+		struct carte carte[5];
+
+	};
+
+	struct points
+	{
+		int points;
+	};
+
+};
+}}}
