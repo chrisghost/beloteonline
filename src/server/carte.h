@@ -12,4 +12,5 @@ public:
 	Couleur getCouleur();
 	Valeur getValeur();
 	int getJoueur();
+	void setJoueur(int id);
 };
