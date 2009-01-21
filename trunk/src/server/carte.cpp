@@ -4,7 +4,7 @@
 
 #include "carte.h"
 
-Carte::Carte(val,coul) {
+Carte::Carte(Valeur val,Couleur coul) {
 	this->val = val;
 	this->coul = coul;
 }
@@ -19,4 +19,8 @@ Valeur Carte::getValeur() {
 
 int Carte::getJoueur() {
 	return id_joueur;
+}
+
+void Carte::setJoueur(int id) {
+	id_joueur = id;
 }
