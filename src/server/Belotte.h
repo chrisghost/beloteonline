@@ -38,6 +38,7 @@ class Belotte {
 		Joueur unJoueur(int id);				//retourne le joueur de l'id si il existe, NULL sinon
 		void finMene();							//compte les points, les ajoute à l'équipe gagnante de la mène
 												// et vide le vecteur de plis pour commencer une nouvelle mène
+		//void jeu(); //methode qui gere tout le déroulement du jeu (distribution des cartes, choix de l'atout par les joueurs, passage d'une mène à une autre, etc ...)
 };
 
 #endif BELOTTE_H_ /*BELOTTE_H_*/
