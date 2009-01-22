@@ -14,13 +14,13 @@
 
 class Equipe
 {
-	public :
+	private :
 		vector<Joueur> joueurs;
 		int idEquipe ;
 		int points;
 		bool partante;
 
-	private :
+	public :
 		//constructeur
 		Equipe(int idEquipe, bool partante);
 
@@ -34,6 +34,7 @@ class Equipe
 								//si il n'y a pas de joueurs ou que l'id n'appartient pas a un joueur de l'equipe: retourne NULL
 		Joueur unJoueur(int id); //retourne le joueur si l'id passé en paramètre est l'id d'un des joueurs de l'équipe
 								 //sinon retourne NULL
+		void ajouterPoints(int p); //ajoute les points à l'équipe
 
 };
 
