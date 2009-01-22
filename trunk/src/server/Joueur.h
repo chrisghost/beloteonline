@@ -8,6 +8,7 @@
 #ifndef JOUEUR_H_
 #define JOUEUR_H_
 
+#include "Main.h"
 
 #include <string>
 #include <iostream>
@@ -24,11 +25,13 @@ class Joueur {
 		//methodes d'acces aux attributs de la classe
 		int getId(); 			//retourne l'id du joueur
 		sf::IpAdress getIp();  //retourne l'ip du joueur
+		Main getMain();
 
 	private :
 		//attributs
 		 int id;
 		 sf::IpAdress ip;
+		 Main main;
 
 };
 
