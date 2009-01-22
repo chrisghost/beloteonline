@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Belotte.h"
+#include "Joueur.h"
 
 /***********************************
  * Constructeur
@@ -41,7 +42,22 @@ bool Belotte::verifCarte(Carte carte) {
 			return true;
 		else
 		{
-
+			Joueur joueur = unJoueur(carte.getJoueur());
+			if(joueur == NULL){cout << "Erreur" << endl; return false;} //au cas ou
+			if(joueur.getMain().aLaCouleur(couleurDemandee)) //si le joueur a la couleur demandee il doit en jouer
+				return false;
+			else
+			{
+				if(carte.getCouleur() == atout) //si la carte est un atout c'est bon
+					return true;
+				else
+				{
+					if(joueur.getMain().aLaCouleur(atout)) //si le joueur a un atout il doit en jouer
+						return false;
+					else
+						return true;
+				}
+			}
 		}
 	}
 }

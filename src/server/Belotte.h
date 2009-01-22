@@ -9,6 +9,7 @@
 #define BELOTTE_H_
 
 #include <vector>
+#include "Equipe.h"
 
 class Belotte {
 
