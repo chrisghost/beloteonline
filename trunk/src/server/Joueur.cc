@@ -5,6 +5,8 @@
  *      Author: ayarim
  */
 
+#include "Main.h"
+
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
@@ -28,4 +30,8 @@ int Joueur::getId() {
 
 sf::IpAdress Joueur::getIp() {
 	return this->ip;
+}
+
+Main Joueur::getMain() {
+	return this->main;
 }

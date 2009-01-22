@@ -11,6 +11,7 @@
 #include <vector>
 
 class Belotte {
+
 	private:
 		//attributs
 		Vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
@@ -33,6 +34,7 @@ class Belotte {
 		bool verifCarte(Carte carte); 			//retourne vrai si la carte peu etre jouee a ce moment de la partie
 		Carte plusHaute(vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
 		void ajouterEquipe(Equipe equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
+		Joueur unJoueur(int id);				//retourne le joueur de l'id si il existe, NULL sinon
 };
 
 #endif BELOTTE_H_ /*BELOTTE_H_*/
