@@ -19,6 +19,7 @@ class Equipe
 		int idEquipe ;
 		int points;
 		bool partante;
+		bool aLaBelote;
 
 	public :
 		//constructeur
@@ -27,6 +28,7 @@ class Equipe
 		//methodes d'acces aux attributs de la classe
 		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
 		void setPartante(bool nouvValeur); //modifie la valeur de l'attribut partante
+		void setBelote(bool nouvValeur);   //modifie la valeur de l'attribut aLaBelote
 
 		//methodes
 		void ajouterJoueur(Joueur joueur); //ajoute un joueur al'equipe (2 maximum)
