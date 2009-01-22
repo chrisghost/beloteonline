@@ -52,3 +52,12 @@ int Equipe::partenaire(int id){
 	else
 		return NULL;
 }
+
+Joueur Equipe::unJoueur(int id){
+	if (joueurs[1].getId() == id)
+		return joueurs[1];
+	else if (joueur[2].getId() == id)
+		return joueurs[2];
+	else
+		return NULL;
+}
