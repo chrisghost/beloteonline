@@ -14,17 +14,23 @@
 
 class Equipe
 {
-public :
-	int idjoueur1 ;
-	int idjoueur2 ;
-	int idequipe ;
-	int point;
-	bool partante;
+	public :
+		vector<Joueur> joueurs;
+		int idEquipe ;
+		int points;
+		bool partante;
 
-private :
+	private :
+		//constructeur
+		Equipe(int idEquipe, bool partante);
 
-	int partenaire(int);
-	bool : estPartante();
+		//methodes d'acces aux attributs de la classe
+		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
+
+		//methodes
+		void ajouterJoueur(Joueur joueur); //ajoute un joueur al'equipe (2 maximum)
+		int partenaire(int id); //retourne l'id du partenaire du joueur passe en parametre
+								//si il n'y a pas de joueurs ou que l'id n'appartient pas a un joueur de l'equipe: retourne NULL
 
 };
 

@@ -8,3 +8,23 @@
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
+
+/***********************************
+ * Constructeur
+ ***********************************/
+Joueur::Joueur(int id, sf::IpAdress ip) {
+	this->id = id;
+	this->ip = ip;
+}
+
+
+/***********************************
+ * Methodes d'acces aux atributs
+ ***********************************/
+int Joueur::getId() {
+	return this->id;
+}
+
+sf::IpAdress Joueur::getIp() {
+	return this->ip;
+}
