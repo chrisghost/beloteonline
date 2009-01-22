@@ -10,6 +10,8 @@
 
 #include <vector>
 #include "Equipe.h"
+#include "Pli.h"
+#include "deftype.h"
 
 class Belotte {
 
