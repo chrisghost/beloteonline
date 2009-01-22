@@ -1,3 +1,6 @@
+#ifndef MAINJOUEUR_H
+#define MAINJOUEUR_H
+
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -18,3 +21,5 @@ public:
 	void retirerCarte(Carte c); // Retire une carte de la main du joueur
 
 };
+
+#endif // MAINJOUEUR_H

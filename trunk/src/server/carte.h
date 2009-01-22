@@ -1,3 +1,6 @@
+#ifndef CARTE_H
+#define CARTE_H
+
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -14,3 +17,5 @@ public:
 	int getJoueur();
 	void setJoueur(int id);
 };
+
+#endif // CARTE_H
