@@ -11,7 +11,6 @@ private:
 	Couleur coul;
 	int id_joueur;
 	Belotte belotte;
-	Pli pli;
 public:
 	Carte(Valeur val,Couleur coul);
 	Couleur getCouleur();
