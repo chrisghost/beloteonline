@@ -67,5 +67,9 @@ void Equipe::ajouterPoints(int p) {
 }
 
 void Equipe::setBelote(bool nouvValeur) {
-	this->aLaBelote = nouvValeur;
+	Belote = nouvValeur;
+}
+
+bool Equipe::aLaBelote() {
+	return Belote;
 }
