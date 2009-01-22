@@ -28,17 +28,17 @@ void Carte::setJoueur(int id) {
 bool Carte::operator<(Carte c) {
 	if (belotte.estAtout(c)) {
 		if (belotte.estAtout(this)) {
-			switch (val) {
-			case valet:
+			switch (val) {			// si les deux cartes sont atout
+			case valet:				// le valet est le plus fort
 				return false;
 				break;
-			case neuf:
+			case neuf:				// ensuite le neuf
 				if (c.getValeur()==valet)
 					return true;
 				else
 					return false;
 				break;
-			default:
+			default:				// et le reste est dans l'ordre normal
 				if (c.getValeur()==valet || c.getValeur()==neuf)
 					return true;
 				else
@@ -47,13 +47,13 @@ bool Carte::operator<(Carte c) {
 			}
 		}
 		else
-			return true;
+			return true;			// si seul c est atout
 	}
 	else {
 		if (belotte.estAtout(this))
-			return false;
+			return false;			// si seul this est atout
 		else {
-			return (val < c.getValeur());
+			return (val < c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial
 		}
 	}
 }
@@ -61,32 +61,32 @@ bool Carte::operator<(Carte c) {
 bool Carte::operator>(Carte c) {
 	if (belotte.estAtout(c)) {
 		if (belotte.estAtout(this)) {
-			switch (val) {
-				case valet:
+			switch (val) {			// si les deux cartes sont atout
+			case valet:				// le valet est le plus fort
+				return true;
+				break;
+			case neuf:				// ensuite le neuf
+				if (c.getValeur()==valet)
+					return false;
+				else
 					return true;
-					break;
-				case neuf:
-					if (c.getValeur()==valet)
-						return false;
-					else
-						return true;
-					break;
-				default:
-					if (c.getValeur()==valet || c.getValeur()==neuf)
-						return false;
-					else
-						return (val > c.getValeur());
-					break;
+				break;
+			default:				// et le reste est dans l'ordre normal
+				if (c.getValeur()==valet || c.getValeur()==neuf)
+					return false;
+				else
+					return (val > c.getValeur());
+				break;
 			}
 		}
 		else
-			return false;
+			return false;			// si seul c est atout
 	}
 	else {
 		if (belotte.estAtout(this))
-			return true;
+			return true;			// si seul this est atout
 		else {
-			return (val > c.getValeur());
+			return (val > c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial
 		}
 	}
 }
