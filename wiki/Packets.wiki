@@ -1,20 +1,20 @@
 #summary Description des packets clients et serveur
 
 Id pour le packet_client:
-1: Connexion
-2: Carte
-3: Reponse
-4: Couleur attout
+  # Connexion
+  # Carte
+  # Reponse
+  # Couleur attout
 
 Id pour le packet_server:
-1: Joueur
-2: Message
-3: Carte
-4: Demande
-5: Atout
-6: Validation
-7: Cartes
-8: Points
+  # Joueur
+  # Message
+  # Carte
+  # Demande
+  # Atout
+  # Validation
+  # Cartes
+  # Points
 
 {{{
 	struct demande
