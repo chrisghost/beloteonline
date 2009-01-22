@@ -1,3 +1,10 @@
+/*
+ * File: Belotte.h
+ * Author: Michael
+ *
+ * Created on January 21, 2009, 5:37 PM
+ */
+
 #ifndef BELOTTE_H_
 #define BELOTTE_H_
 
