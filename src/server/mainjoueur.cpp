@@ -21,7 +21,7 @@ bool MainJoueur::aLaCouleur(Couleur coul) {
 bool MainJoueur::aUnAtoutSuperieur(Carte c) {
 	bool oui = false;
 	for (unsigned int i=0;i<main.size();i++) {
-		if (main[i] > c)		// operateur de comparaison à définir, en tenant compte de la couleur de l'atout...
+		if (main[i] > c)
 			oui = true;
 	}
 	return oui;
@@ -34,7 +34,7 @@ void MainJoueur::ajouterCarte(Carte c) {
 
 void MainJoueur::retirerCarte(Carte c) {
 	unsigned int i=0;
-	while (i < main.size() && main[i] != c) {		// idem, operateur à définir
+	while (i < main.size() && !(main[i] == c)) {
 		i++;
 	}
 	if (i != main.size() && main[i] == c)

@@ -10,12 +10,17 @@ private:
 	Valeur val;
 	Couleur coul;
 	int id_joueur;
+	Belotte belotte;
+	Pli pli;
 public:
 	Carte(Valeur val,Couleur coul);
 	Couleur getCouleur();
 	Valeur getValeur();
 	int getJoueur();
 	void setJoueur(int id);
+	bool operator<(Carte c);
+	bool operator>(Carte c);
+	bool operator==(Carte c); // Renvoie vrai si les deux cartes sont identique (même couleur et même valeur)
 };
 
 #endif // CARTE_H
