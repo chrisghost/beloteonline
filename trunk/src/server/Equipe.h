@@ -19,7 +19,7 @@ class Equipe
 		int idEquipe ;
 		int points;
 		bool partante;
-		bool aLaBelote;
+		bool Belote;
 
 	public :
 		//constructeur
@@ -28,6 +28,7 @@ class Equipe
 		//methodes d'acces aux attributs de la classe
 		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
 		void setPartante(bool nouvValeur); //modifie la valeur de l'attribut partante
+		bool aLaBelote();  //retourne vrai si l'équipe a la belote et faux sinon
 		void setBelote(bool nouvValeur);   //modifie la valeur de l'attribut aLaBelote
 
 		//methodes
