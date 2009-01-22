@@ -65,3 +65,7 @@ Joueur Equipe::unJoueur(int id){
 void Equipe::ajouterPoints(int p) {
 	this->points = this->points+p;
 }
+
+void Equipe::setBelote(bool nouvValeur) {
+	this->aLaBelote = nouvValeur;
+}
