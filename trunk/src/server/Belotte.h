@@ -13,7 +13,7 @@
 class Belotte {
 	private:
 		//attributs
-		Pli pli;
+		Vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
 		Vector<Equipe> equipes;
 		Couleur atout;
 		int pointsMax;
