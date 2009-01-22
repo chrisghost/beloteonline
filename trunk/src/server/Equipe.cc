@@ -5,27 +5,46 @@
  *      Author: ayarim
  */
 
-#include "Client.h"
 #include "Joueur.h"
 #include "Equipe.h"
 
+/***********************************
+ * Constructeur
+ ***********************************/
+Equipe::Equipe(int idEquipe, bool partante)
+	:joueurs(){
+	this->idEquipe = idEquipe;
+	this->partante = partante;
+	this->points = 0;
+}
 
+/***********************************
+ * Methodes d'acces aux atributs
+ ***********************************/
+bool Equipe::estPartante(){
+	return this->partante;
+}
 
-	int Equipe::partenaire(int idautre){
-		this->idautre=s;
-			// attention : l'ordre des tests ci-dessous n'est pas innocent !
-			if      (s==this->idjoueur1)
-				return this->idjoueur2;
-			else if      (s==this->idjoueur2)
-				return this->idjoueur1;
-			else
-							return 0;
+/***********************************
+ * Methodes
+ ***********************************/
+void ajouterJoueur(Joueur joueur) {
+	if(joueurs.size() < 2)
+		joueurs.push_back(equipe);
+	else
+		cout << "Impossible d'ajouter plus de deux equipe a une partie." << endl;
+}
+
+int Equipe::partenaire(int id){
+	if (joueurs.size() == 2)
+	{
+		if(id == joueurs[1].getId())
+			return joueur[2].getId();
+		else if(id == joueurs[2].getId())
+			return joueurs[1].getId();
+		else
+			return NULL;
 	}
-
-
-
-
-	bool Equipe::estPartante() {
-		return this->partante;
-
-	};
+	else
+		return NULL;
+}

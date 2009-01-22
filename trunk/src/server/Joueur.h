@@ -13,15 +13,22 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 
-
 using namespace std;
+
 class Joueur {
 
-public :
+	public :
+		//constructeur
+		Joueur(int id, sf::IpAdress ip);
 
-private :
-	 int id;
-	sf::IpAdress ;
+		//methodes d'acces aux attributs de la classe
+		int getId(); 			//retourne l'id du joueur
+		sf::IpAdress getIp();  //retourne l'ip du joueur
+
+	private :
+		//attributs
+		 int id;
+		 sf::IpAdress ip;
 
 };
 
