@@ -29,17 +29,17 @@ bool Carte::operator<(Carte c) {
 	if (belotte.estAtout(c)) {
 		if (belotte.estAtout(this)) {
 			switch (val) {
-			case V:
+			case valet:
 				return false;
 				break;
-			case 9:
-				if (c.getValeur()==V)
+			case neuf:
+				if (c.getValeur()==valet)
 					return true;
 				else
 					return false;
 				break;
 			default:
-				if (c.getValeur()==V || c.getValeur()==9)
+				if (c.getValeur()==valet || c.getValeur()==neuf)
 					return true;
 				else
 					return (val < c.getValeur());
@@ -62,17 +62,17 @@ bool Carte::operator>(Carte c) {
 	if (belotte.estAtout(c)) {
 		if (belotte.estAtout(this)) {
 			switch (val) {
-				case V:
+				case valet:
 					return true;
 					break;
-				case 9:
-					if (c.getValeur()==V)
+				case neuf:
+					if (c.getValeur()==valet)
 						return false;
 					else
 						return true;
 					break;
 				default:
-					if (c.getValeur()==V || c.getValeur()==9)
+					if (c.getValeur()==valet || c.getValeur()==neuf)
 						return false;
 					else
 						return (val > c.getValeur());
