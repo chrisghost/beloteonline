@@ -32,6 +32,8 @@ class Equipe
 		void ajouterJoueur(Joueur joueur); //ajoute un joueur al'equipe (2 maximum)
 		int partenaire(int id); //retourne l'id du partenaire du joueur passe en parametre
 								//si il n'y a pas de joueurs ou que l'id n'appartient pas a un joueur de l'equipe: retourne NULL
+		Joueur unJoueur(int id); //retourne le joueur si l'id passé en paramètre est l'id d'un des joueurs de l'équipe
+								 //sinon retourne NULL
 
 };
 
