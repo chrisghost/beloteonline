@@ -12,7 +12,7 @@
  * Constructeur
  ***********************************/
 Equipe::Equipe(int idEquipe, bool partante)
-	:joueurs(){
+    :joueurs(){
 	this->idEquipe = idEquipe;
 	this->partante = partante;
 	this->points = 0;
@@ -21,8 +21,12 @@ Equipe::Equipe(int idEquipe, bool partante)
 /***********************************
  * Methodes d'acces aux atributs
  ***********************************/
-bool Equipe::estPartante(){
+bool Equipe::estPartante() {
 	return this->partante;
+}
+
+void Equipe::setPartante(bool nouvValeur) {
+	this->partante = nouvValeur;
 }
 
 /***********************************

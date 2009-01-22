@@ -26,6 +26,7 @@ class Equipe
 
 		//methodes d'acces aux attributs de la classe
 		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
+		void setPartante(bool nouvValeur); //modifie la valeur de l'attribut partante
 
 		//methodes
 		void ajouterJoueur(Joueur joueur); //ajoute un joueur al'equipe (2 maximum)
