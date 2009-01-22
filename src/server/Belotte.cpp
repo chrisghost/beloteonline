@@ -107,12 +107,79 @@ Joueur Belotte::unJoueur(int id) {
 
 void Belotte::finMene() {
 	vector<Pli>::iterator i = plis.begin();
-	Equipe E1,E2;
+	Equipe E1, E2;
 	int ptsE1 = 0;
 	int ptsE2 = 0;
-	E1 = *i.gagnant().equipe()
+	E1 = *i.gagnant().equipe();
+	ptsE1 = ptsE1 + *i.calcul_points();
+	i++;
 	while(i != plis.end()) {
-		.
+		if (*i.gagnant().equipe() == E1)
+			ptsE1 = ptsE1 + *i.calcul_points();
+		else {
+			if (E2 = NULL)
+				E2 = *i.gagnant().equipe();
+			ptsE2 = ptsE2 + *i.calcul_points();
+		}
 		i++;
 	}
+	i = NULL;
+	vector<Pli>::reverse_iterator rit;
+	rit=plis.rbegin();
+	if (rit.gagnant().equipe() == E1) //ajout des "10 de der"
+		ptsE1 = ptsE1 + 10;
+	else
+		ptsE2 = ptsE2 + 10;
+	rit = NULL;
+	if (ptsE1 == 0 && E2.estPartante()) { //si E2 est partie et met capot E1
+		if (E2.aLaBelote())
+			E2.ajouterPoints(272);
+		else
+			E2.ajouterPoints(252);
+	}
+	else if (ptsE1 == 0 && E1.estPartante()) { //si E2 n'est pas partie et met capot E1
+		if (E2.aLaBelote())
+			E2.ajouterPoints(182);
+		else
+			E2.ajouterPoints(162);
+	}
+	if (ptsE2 == 0 && E1.estPartante()) { //si E1 est partie et met capot E2
+		if (E1.aLaBelote())
+			E1.ajouterPoints(272);
+		else
+			E1.ajouterPoints(252);
+	}
+	else if (ptsE2 == 0 && E2.estPartante()) { //si E1 n'est pas partie et met capot E2
+		if (E1.aLaBelote())
+			E1.ajouterPoints(182);
+		else
+			E1.ajouterPoints(162);
+	}
+	else if (E1.estPartante() && ptsE1 > 82) { //si E1 est partie et fait ses points
+		if (E1.aLaBelote())
+			ptsE1 = ptsE1 + 20;
+		else if (E2.aLaBelote())
+			ptsE2 = ptsE2 + 20;
+		E1.ajouterPoints(ptsE1);
+		E2.ajouterPoints(ptsE2);
+	}
+	else if (E2.estPartante() && ptsE2 > 82) { //si E2 est partie et fait ses points
+		if (E1.aLaBelote())
+			ptsE1 = ptsE1 + 20;
+		else if (E2.aLaBelote())
+			ptsE2 = ptsE2 + 20;
+		E1.ajouterPoints(ptsE1);
+		E2.ajouterPoints(ptsE2);
+	}
+	else if (E1.estPartante() && ptsE1 < 82) { //si E1 est partie mais est dedans
+		if (E1.aLaBelote() || E2.aLaBelote())
+			ptsE2 = ptsE2 + 20;
+		E2.ajouterPoints(162);
+	}
+	else if (E2.estPartante() && ptsE2 < 82) { //si E2 est partie mais est dedans
+		if (E1.aLaBelote() || E2.aLaBelote())
+			ptsE1 = ptsE1 + 20;
+		E1.ajouterPoints(162);
+	}
+	plis.clear();
 }
