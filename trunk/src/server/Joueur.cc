@@ -14,10 +14,11 @@
 /***********************************
  * Constructeur
  ***********************************/
-Joueur::Joueur(int id, sf::IpAdress ip)
+Joueur::Joueur(int id, sf::IpAdress ip, Equipe E)
 	:Mainjoueur(){
 	this->id = id;
 	this->ip = ip;
+	this->equipe = E;
 }
 
 
@@ -34,4 +35,8 @@ sf::IpAdress Joueur::getIp() {
 
 Mainjoueur Joueur::getMain() {
 	return this->main;
+}
+
+Equipe Joueur::equipe() {
+	return equipe;
 }

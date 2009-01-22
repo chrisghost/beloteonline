@@ -36,6 +36,8 @@ class Belotte {
 		Carte plusHaute(vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
 		void ajouterEquipe(Equipe equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
 		Joueur unJoueur(int id);				//retourne le joueur de l'id si il existe, NULL sinon
+		void finMene();							//compte les points, les ajoute à l'équipe gagnante de la mène
+												// et vide le vecteur de plis pour commencer une nouvelle mène
 };
 
 #endif BELOTTE_H_ /*BELOTTE_H_*/

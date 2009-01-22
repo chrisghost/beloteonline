@@ -8,7 +8,8 @@
 #ifndef JOUEUR_H_
 #define JOUEUR_H_
 
-#include "Main.h"
+#include "mainjoueur.h"
+#include "Equipe.h"
 
 #include <string>
 #include <iostream>
@@ -20,16 +21,18 @@ class Joueur {
 
 	public :
 		//constructeur
-		Joueur(int id, sf::IpAdress ip);
+		Joueur(int id, sf::IpAdress ip, Equipe E);
 
 		//methodes d'acces aux attributs de la classe
 		int getId(); 			//retourne l'id du joueur
 		sf::IpAdress getIp();   //retourne l'ip du joueur
 		Mainjoueur getMain();	//retourne la main du joueur
+		Equipe equipe();		//retourne l'équipe du joueur
 
 	private :
 		//attributs
 		 int id;
+		 Equipe equipe;
 		 sf::IpAdress ip;
 		 Mainjoueur main;
 };

@@ -61,3 +61,7 @@ Joueur Equipe::unJoueur(int id){
 	else
 		return NULL;
 }
+
+void Equipe::ajouterPoints(int p) {
+	this->points = this->points+p;
+}

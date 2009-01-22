@@ -104,3 +104,15 @@ Joueur Belotte::unJoueur(int id) {
 	else
 		return NULL;
 }
+
+void Belotte::finMene() {
+	vector<Pli>::iterator i = plis.begin();
+	Equipe E1,E2;
+	int ptsE1 = 0;
+	int ptsE2 = 0;
+	E1 = *i.gagnant().equipe()
+	while(i != plis.end()) {
+		.
+		i++;
+	}
+}
