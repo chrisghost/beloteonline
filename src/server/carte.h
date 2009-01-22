@@ -5,6 +5,9 @@
 #include <string>
 #include <iostream>
 
+#include "deftype.h"
+#include "Belotte.h"
+
 class Carte {
 private:
 	Valeur val;
