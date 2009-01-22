@@ -70,8 +70,21 @@ bool Belotte::estAtout(Carte carte) {
 }
 
 void Belotte::ajouterEquipe(Equipe equipe) {
-	if(equipes.size() < 2)
+	if(equipes.size() < 2) //au cas ou
 		equipes.push_back(equipe);
 	else
 		cout << "Impossible d'ajouter plus de deux equipe a une partie." << endl;
+}
+
+Joueur Belotte::unJoueur(int id) {
+	if(equipes.size() == 2) //au cas ou
+	{
+		Joueur joueur = equipes[1].unJoueur(id);
+		if(joueur != NULL) //si le joueur est dans la premiere equipe c'est termine
+			return joueur;
+		else
+			return equipe[2].unJoueur(id); //sinon on retourne le resultat de la recherche
+	}
+	else
+		return NULL;
 }
