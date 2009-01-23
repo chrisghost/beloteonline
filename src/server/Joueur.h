@@ -21,11 +21,11 @@ class Joueur {
 
 	public :
 		//constructeur
-		Joueur(int id, sf::IpAdress ip, Equipe E);
+		Joueur(int id, sf::IPAddress ip, Equipe E);
 
 		//methodes d'acces aux attributs de la classe
 		int getId(); 			//retourne l'id du joueur
-		sf::IpAdress getIp();   //retourne l'ip du joueur
+		sf::IPAddress getIp();   //retourne l'ip du joueur
 		MainJoueur getMain();	//retourne la main du joueur
 		Equipe getEquipe();		//retourne l'équipe du joueur
 		void setMain(MainJoueur m); //donne une nouvelle main au joueur
@@ -34,7 +34,7 @@ class Joueur {
 		//attributs
 		 int id;
 		 Equipe equipe;
-		 sf::IpAdress ip;
+		 sf::IPAddress ip;
 		 MainJoueur main;
 };
 

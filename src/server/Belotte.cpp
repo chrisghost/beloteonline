@@ -6,7 +6,6 @@
  */
 
 #include "Belotte.h"
-#include "deftype.h"
 
 /***********************************
  * Constructeur

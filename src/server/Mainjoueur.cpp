@@ -5,7 +5,7 @@
 
 #include "mainjoueur.h"
 
-MainJoueur::MainJoueur(Joueur j) : main() {
+MainJoueur::MainJoueur(Joueur j) : joueur() {
 	joueur = j;
 }
 
