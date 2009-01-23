@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
+#include "Joueur.h"
 
 class Equipe
 {

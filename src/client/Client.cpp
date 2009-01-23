@@ -1,20 +1,5 @@
 #include "Client.h"
-
-struct login_s // Structure pour les transferts de données liées au login
-{
-    string log;
-};
-
-sf::Packet& operator <<(sf::Packet& Packet, login_s& pl)
-{
-    return Packet << pl.log;
-}
-
-sf::Packet& operator >>(sf::Packet& Packet, login_s& pl)
-{
-    return Packet >> pl.log;
-}
-
+#include "../netstruct.h"
 ////////////////////////////////////////////////////////////
 
 Client::Client(unsigned short Port)
@@ -27,33 +12,40 @@ Client::Client(unsigned short Port)
     }
     while (!ServerAddress.IsValid());
 
-    if (!sClient.Connect(Port, ServerAddress))
-        //return;
+    cout << "Connexion à " << ServerAddress << " sur le port " << Port << endl;
+
+    if (sClient.Connect(Port, ServerAddress)){
+        cout << "Erreur a la connexion !" << endl;
+        return;}
     cout << "Connected to server " << ServerAddress << endl;
-    
-    string login;
-    
-    cout << "Entrez le login : ";
-    cin >> login;
-    
-    this->Connexion(login);
+
+    	this->Connexion();
 
 }
 
-bool Client::Connexion(string login){
-	login_s plogin;
+bool Client::Connexion(){
+        string login;
+        cout << "Entrez le login : ";
+        cin >> login;
+        cin.ignore(1000, '\n');
 
-	plogin.log = login;
+    	packet_client pk = {1 , login , id_j , SEPT , CARREAU , false , CARREAU};
 
-    sf::Packet RegularPacket;
-    RegularPacket << plogin;
-    if (sClient.Send(RegularPacket) != sf::Socket::Done)
-        return false;
+        sf::Packet Packet;
 
-    cout << "Login sent : " << endl;
-    cout << plogin.log << endl;
+        // << pl.id << pl.log << pl.id_j << pl.val << pl.couleur << pl.reponse << pl.couleur_att;
 
-    return true;
+        Packet << pk;
+    return (sClient.Send(Packet) == sf::Socket::Done);
+    // RECUPERE LE PACKET DEPUIS LE SERVER AVEC L ID JOUEUR
+}
+bool Client::envoyer_carte(Carte c){// ID = 2
+	packet_client pk = {2 , "" , id_j , c.getValeur() , c.getCouleur() , false , CARREAU};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+    return (sClient.Send(Packet) == sf::Socket::Done);
 }
 
 Client::~Client()
