@@ -15,14 +15,20 @@ private:
 	int id_joueur;
 	Belotte belotte;
 public:
+
+	//constructeur
 	Carte(Valeur val,Couleur coul);
+
+	//methodes d'acces aux attributs de la classe
 	Couleur getCouleur();
 	Valeur getValeur();
 	int getJoueur();
 	void setJoueur(int id);
+
+	//operateurs
 	bool operator<(Carte c);
 	bool operator>(Carte c);
 	bool operator==(Carte c); // Renvoie vrai si les deux cartes sont identique (même couleur et même valeur)
 };
 
-#endif // CARTE_H
+#endif /*CARTE_H*/
