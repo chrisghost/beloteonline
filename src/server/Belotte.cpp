@@ -15,6 +15,7 @@ Belotte(Couleur atout, int pointsMax, int preneur)
 	this->atout = atout;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
+	this->pliEnCours = 0;
 }
 
 /***********************************
@@ -36,11 +37,11 @@ void Belotte::ajouterJoueur(Joueur j) {
  * Methodes
  ***********************************/
 bool Belotte::verifCarte(Carte carte) {
-	if (pli.estVide() == true) //si la carte est la premiere du pli, n'importe quelle carte peu etre jouee
+	if (plis[pliEnCours].estVide() == true) //si la carte est la premiere du pli, n'importe quelle carte peu etre jouee
 		return true;
 	else
 	{
-		if(carte.getCouleur() == couleurDemandee) //si la carte est de la couleur demandee, c'est bon
+		if(carte.getCouleur() == plis[pliEnCours].getCouleur()) //si la carte est de la couleur demandee, c'est bon
 			return true;
 		else
 		{
@@ -204,23 +205,36 @@ void Belotte::jeu() {
 	Equipe E2(2, false);
 
 	//initialisation des 4 mains :
-	MainJoueur m1 (j1);
-	MainJoueur m2 (j2);
-	MainJoueur m3 (j3);
-	MainJoueur m4 (j4);
+	MainJoueur m1 (joueurs[0]);
+	MainJoueur m2 (joueurs[1]);
+	MainJoueur m3 (joueurs[2]);
+	MainJoueur m4 (joueurs[3]);
 	int i;
+	unsigned int pos;
+	srand ( time(NULL) );
 	for (i = 0; i < 5; i++) {
-		m1.ajouterCarte(vectCartes.pop_back());
+		pos = rand() % vectCartes.size();
+		m1.ajouterCarte(vectCartes[pos]);
+		vectCartes.erase(vectCartes.begin()+pos);
 	}
 	for (i = 0; i < 5; i++) {
-		m2.ajouterCarte(vectCartes.pop_back());
+		pos = rand() % vectCartes.size();
+		m2.ajouterCarte(vectCartes[pos]);
+		vectCartes.erase(vectCartes.begin()+pos);
 	}
 	for (i = 0; i < 5; i++) {
-		m3.ajouterCarte(vectCartes.pop_back());
+		pos = rand() % vectCartes.size();
+		m3.ajouterCarte(vectCartes[pos]);
+		vectCartes.erase(vectCartes.begin()+pos);
 	}
 	for (i = 0; i < 5; i++) {
-		m4.ajouterCarte(vectCartes.pop_back());
+		pos = rand() % vectCartes.size();
+		m4.ajouterCarte(vectCartes[pos]);
+		vectCartes.erase(vectCartes.begin()+pos);
 	}
-	Carte vectCartes.pop_back();
+	pos = rand() % vectCartes.size();
+	Carte car = vectCartes[pos];
+	vectCartes.erase(vectCartes.begin()+pos);
+
 	//Comment montrer cette carte à tous les joueurs ??
 }
