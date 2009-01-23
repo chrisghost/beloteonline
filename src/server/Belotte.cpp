@@ -183,3 +183,26 @@ void Belotte::finMene() {
 	}
 	plis.clear();
 }
+
+void Belotte::jeu() {
+	vector<carte> vectCartes;
+	Couleur coul = pique;
+	Valeur val = sept;
+	while (coul <= carreau) {
+		while (val <= as) {
+			Carte c (val, coul);
+			vectCartes.push_back(c); //il faudrait randomiser le vecteur mais je sais pas encore comment
+			if (val != as)
+				val++;
+		}
+		if (coul != carreau)
+			coul++;
+	}
+	Equipe E1(1, true);
+	Equipe E2(2, false);
+	Joueur j1(1, /*ip ?*/, E1);
+	Joueur j2(2, /*ip ?*/, E2);
+	Joueur j3(3, /*ip ?*/, E1);
+	Joueur j4(4, /*ip ?*/, E2);  //pas fini
+
+}

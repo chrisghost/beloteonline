@@ -8,7 +8,7 @@
 #ifndef JOUEUR_H_
 #define JOUEUR_H_
 
-#include "mainjoueur.h"
+#include "Mainjoueur.h"
 #include "Equipe.h"
 
 #include <string>
@@ -28,6 +28,7 @@ class Joueur {
 		sf::IpAdress getIp();   //retourne l'ip du joueur
 		Mainjoueur getMain();	//retourne la main du joueur
 		Equipe equipe();		//retourne l'équipe du joueur
+		void setMain(Mainjoueur m); //donne une nouvelle main au joueur
 
 	private :
 		//attributs
