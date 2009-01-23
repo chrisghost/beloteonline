@@ -17,8 +17,8 @@ class Belotte {
 
 	private:
 		//attributs
-		Vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
-		Vector<Equipe> equipes;
+		vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
+		vector<Equipe> equipes;
 		Couleur atout;
 		int pointsMax;
 		int preneur;
@@ -43,4 +43,4 @@ class Belotte {
 		//void jeu(); //methode qui gere tout le déroulement du jeu (distribution des cartes, choix de l'atout par les joueurs, passage d'une mène à une autre, etc ...)
 };
 
-#endif BELOTTE_H_ /*BELOTTE_H_*/
+#endif /*BELOTTE_H_*/
