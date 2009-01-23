@@ -14,6 +14,7 @@
 #include "Joueur.h"
 #include "Mainjoueur.h"
 #include "deftype.h"
+#include <stdlib.h>
 #include <vector>
 #include <iostream>
 
@@ -27,6 +28,7 @@ class Belotte {
 		Couleur atout;
 		int pointsMax;
 		int preneur;
+		int pliEnCours;
 
 	public:
 
