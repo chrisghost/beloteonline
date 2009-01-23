@@ -7,7 +7,6 @@
 #include "../server/carte.h"
 //#include "../server/deftype.h"
 
-
 using namespace std;
 class Client
 {
