@@ -9,9 +9,12 @@
 #define BELOTTE_H_
 
 #include <vector>
+#include <iostream>
 #include "Equipe.h"
 #include "Pli.h"
 #include "deftype.h"
+#include "Joueur.h"
+#include "Mainjoueur.h"
 
 class Belotte {
 
@@ -19,6 +22,7 @@ class Belotte {
 		//attributs
 		vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
 		vector<Equipe> equipes;
+		vector<Joueur> joueurs;
 		Couleur atout;
 		int pointsMax;
 		int preneur;
@@ -31,6 +35,7 @@ class Belotte {
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
 		void setPreneur(int id);
+		void ajouterJoueur(Joueur j);
 
 		//methodes
 		bool estAtout(Carte carte); 			//retourne vrai si la carte  est un atout

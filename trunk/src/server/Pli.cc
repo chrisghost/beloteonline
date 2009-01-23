@@ -87,3 +87,7 @@ int Pli::gagnant() {
 	return carteMaitre.getJoueur();
 	//retrourn l'id du joueur ayant jouer carteMaitre
 }
+
+void Pli::setCoulDemandee(Couleur coul) {
+	this->couleurDemandee = coul;
+}

@@ -4,9 +4,7 @@
  *  Created on: 21 janv. 2009
  *      Author: ayarim
  */
-
-#include "Main.h"
-
+#include "Joueur.h"
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
@@ -15,7 +13,7 @@
  * Constructeur
  ***********************************/
 Joueur::Joueur(int id, sf::IpAdress ip, Equipe E)
-	:Mainjoueur(this){
+	:MainJoueur(this){
 	this->id = id;
 	this->ip = ip;
 	this->equipe = E;
@@ -41,6 +39,6 @@ Equipe Joueur::equipe() {
 	return equipe;
 }
 
-void Joueur::setMain(Mainjoueur m) {
+void Joueur::setMain(MainJoueur m) {
 	this->main = m;
 }
