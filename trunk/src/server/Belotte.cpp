@@ -82,7 +82,7 @@ Carte Belotte::plusHaute(vector<Carte> cartes) {
 }
 
 bool Belotte::estAtout(Carte carte) {
-	if(carte.getCouleur == atout)
+	if(carte.getCouleur() == atout)
 		return true;
 	else
 		return false;
@@ -98,11 +98,10 @@ void Belotte::ajouterEquipe(Equipe equipe) {
 Joueur Belotte::unJoueur(int id) {
 	if(equipes.size() == 2) //au cas ou
 	{
-		Joueur joueur = equipes[1].unJoueur(id);
-		if(joueur != NULL) //si le joueur est dans la premiere equipe c'est termine
-			return joueur;
+		if(equipes[1].unJoueur(id) != NULL) //si le joueur est dans la premiere equipe c'est termine
+			return equipes[1].unJoueur(id);
 		else
-			return equipe[2].unJoueur(id); //sinon on retourne le resultat de la recherche
+			return equipes[2].unJoueur(id); //sinon on retourne le resultat de la recherche
 	}
 	else
 		return NULL;
