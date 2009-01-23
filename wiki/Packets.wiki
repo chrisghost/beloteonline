@@ -6,6 +6,19 @@ Id pour le packet_client:
   # Reponse
   # Couleur attout
 
+{{{
+struct packet_client // Structure pour les transferts de données
+{
+	int id;
+	string log;
+	int id_j;
+	enum Valeur val;
+	enum Couleur couleur;
+	bool reponse;
+	enum Couleur couleur_att;
+};
+}}}
+
 Id pour le packet_server:
   # Joueur
   # Message
