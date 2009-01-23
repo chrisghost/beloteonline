@@ -12,6 +12,7 @@ public:
 	Server(unsigned short Port);
 	virtual ~Server();
 	bool connecter();
+	//methode pour afficher à chaque joueur la carte pour qu'ils choisissent si ils la prennent ou non (renvoie l'adresse du joueur ou null si personne la prend)
 private:
 	sf::SocketTCP sServer;
 	unsigned short Port;
