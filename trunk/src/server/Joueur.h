@@ -8,14 +8,17 @@
 #ifndef JOUEUR_H_
 #define JOUEUR_H_
 
-#include "Mainjoueur.h"
-#include "Equipe.h"
-
+#include "Belotte.h"
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
 
+//#include "Mainjoueur.h"
+
 using namespace std;
+
+class Equipe;
+class MainJoueur;
 
 class Joueur {
 
