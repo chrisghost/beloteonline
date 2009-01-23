@@ -1,5 +1,5 @@
 #include "Server.h"
-#include "../netstruct.h"
+#include "netstruct.h"
 
 ////////////////////////////////////////////////////////////
 
