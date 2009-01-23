@@ -26,16 +26,16 @@ class Joueur {
 		//methodes d'acces aux attributs de la classe
 		int getId(); 			//retourne l'id du joueur
 		sf::IpAdress getIp();   //retourne l'ip du joueur
-		Mainjoueur getMain();	//retourne la main du joueur
+		MainJoueur getMain();	//retourne la main du joueur
 		Equipe equipe();		//retourne l'équipe du joueur
-		void setMain(Mainjoueur m); //donne une nouvelle main au joueur
+		void setMain(MainJoueur m); //donne une nouvelle main au joueur
 
 	private :
 		//attributs
 		 int id;
 		 Equipe equipe;
 		 sf::IpAdress ip;
-		 Mainjoueur main;
+		 MainJoueur main;
 };
 
 

@@ -5,15 +5,13 @@
  * Created on January 21, 2009, 5:37 PM
  */
 
-#include <iostream>
 #include "Belotte.h"
-#include "Joueur.h"
 
 /***********************************
  * Constructeur
  ***********************************/
 Belotte(Couleur atout, int pointsMax, int preneur)
-	:equipes(), pli() {
+	:equipes(), plis(), joueurs() {
 	this->atout = atout;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
@@ -28,6 +26,10 @@ void Belotte::setPreneur(int preneur) {
 
 void Belotte::setAtout(Couleur atout) {
 	this->atout = atout;
+}
+
+void Belotte::ajouterJoueur(Joueur j) {
+
 }
 
 /***********************************
@@ -185,7 +187,7 @@ void Belotte::finMene() {
 }
 
 void Belotte::jeu() {
-	vector<carte> vectCartes;
+	vector<Carte> vectCartes;
 	Couleur coul = pique;
 	Valeur val = sept;
 	while (coul <= carreau) {
@@ -200,9 +202,25 @@ void Belotte::jeu() {
 	}
 	Equipe E1(1, true);
 	Equipe E2(2, false);
-	Joueur j1(1, /*ip ?*/, E1);
-	Joueur j2(2, /*ip ?*/, E2);
-	Joueur j3(3, /*ip ?*/, E1);
-	Joueur j4(4, /*ip ?*/, E2);  //pas fini
 
+	//initialisation des 4 mains :
+	MainJoueur m1 (j1);
+	MainJoueur m2 (j2);
+	MainJoueur m3 (j3);
+	MainJoueur m4 (j4);
+	int i;
+	for (i = 0; i < 5; i++) {
+		m1.ajouterCarte(vectCartes.pop_back());
+	}
+	for (i = 0; i < 5; i++) {
+		m2.ajouterCarte(vectCartes.pop_back());
+	}
+	for (i = 0; i < 5; i++) {
+		m3.ajouterCarte(vectCartes.pop_back());
+	}
+	for (i = 0; i < 5; i++) {
+		m4.ajouterCarte(vectCartes.pop_back());
+	}
+	Carte vectCartes.pop_back();
+	//Comment montrer cette carte à tous les joueurs ??
 }
