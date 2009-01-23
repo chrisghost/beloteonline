@@ -8,10 +8,12 @@
 #ifndef EQUIPE_H_
 #define EQUIPE_H_
 
+#include "Belotte.h"
+#include "Joueur.h"
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
-#include "Joueur.h"
+
 
 class Equipe
 {
@@ -27,6 +29,7 @@ class Equipe
 		Equipe(int idEquipe, bool partante);
 
 		//methodes d'acces aux attributs de la classe
+		inline int getId(){return idEquipe;}
 		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
 		void setPartante(bool nouvValeur); //modifie la valeur de l'attribut partante
 		bool aLaBelote();  //retourne vrai si l'équipe a la belote et faux sinon

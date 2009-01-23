@@ -6,11 +6,12 @@
  */
 
 #include "Belotte.h"
+#include <stdlib.h>
 
 /***********************************
  * Constructeur
  ***********************************/
-Belotte(Couleur atout, int pointsMax, int preneur)
+Belotte::Belotte(Couleur atout, int pointsMax, int preneur)
 	:equipes(), plis(), joueurs() {
 	this->atout = atout;
 	this->pointsMax = pointsMax;
@@ -46,8 +47,8 @@ bool Belotte::verifCarte(Carte carte) {
 		else
 		{
 			Joueur joueur = unJoueur(carte.getJoueur());
-			if(joueur == NULL){cout << "Erreur" << endl; return false;} //au cas ou
-			if(joueur.getMain().aLaCouleur(couleurDemandee)) //si le joueur a la couleur demandee il doit en jouer
+			if(joueur.getId() == NULL){cout << "Erreur" << endl; return false;} //au cas ou
+			if(joueur.getMain().aLaCouleur(plis[pliEnCours].getCouleur())) //si le joueur a la couleur demandee il doit en jouer
 				return false;
 			else
 			{
@@ -78,7 +79,7 @@ Carte Belotte::plusHaute(vector<Carte> cartes) {
 
 	}
 	else
-		return NULL;
+		return new Carte(NULL);
 }
 
 bool Belotte::estAtout(Carte carte) {
@@ -98,41 +99,46 @@ void Belotte::ajouterEquipe(Equipe equipe) {
 Joueur Belotte::unJoueur(int id) {
 	if(equipes.size() == 2) //au cas ou
 	{
-		if(equipes[1].unJoueur(id) != NULL) //si le joueur est dans la premiere equipe c'est termine
+		if(equipes[1].unJoueur(id).getId() != NULL) //si le joueur est dans la premiere equipe c'est termine
 			return equipes[1].unJoueur(id);
 		else
 			return equipes[2].unJoueur(id); //sinon on retourne le resultat de la recherche
 	}
-	else
-		return NULL;
+	else{
+		Equipe e(-1,false);
+		sf::IPAddress ip("localhost");
+		Joueur j(-1, ip, e);
+		return j;
+	}
 }
 
 void Belotte::finMene() {
+	bool e2undef = true;
 	vector<Pli>::iterator i = plis.begin();
-	Equipe E1, E2;
+
 	int ptsE1 = 0;
 	int ptsE2 = 0;
-	E1 = *i.gagnant().equipe();
-	ptsE1 = ptsE1 + *i.calcul_points();
+	Equipe E1 = Belotte::unJoueur(i->gagnant()).getEquipe();
+	ptsE1 = ptsE1 + i->calcul_points();
 	i++;
 	while(i != plis.end()) {
-		if (*i.gagnant().equipe() == E1)
-			ptsE1 = ptsE1 + *i.calcul_points();
+		if (Belotte::unJoueur(i->gagnant()).getEquipe().getId() == E1.getId())
+			ptsE1 = ptsE1 + i->calcul_points();
 		else {
-			if (E2 = NULL)
-				E2 = *i.gagnant().equipe();
-			ptsE2 = ptsE2 + *i.calcul_points();
+			if(e2undef){
+				Equipe E2 = Belotte::unJoueur(i->gagnant()).getEquipe();
+				e2undef = false;}
+			ptsE2 = ptsE2 + i->calcul_points();
 		}
 		i++;
 	}
-	i = NULL;
 	vector<Pli>::reverse_iterator rit;
 	rit=plis.rbegin();
-	if (rit.gagnant().equipe() == E1) //ajout des "10 de der"
+	if (Belotte::unJoueur(rit->gagnant()).getEquipe().getId() == E1.getId()) //ajout des "10 de der"
 		ptsE1 = ptsE1 + 10;
 	else
 		ptsE2 = ptsE2 + 10;
-	rit = NULL;
+
 	if (ptsE1 == 0 && E2.estPartante()) { //si E2 est partie et met capot E1
 		if (E2.aLaBelote())
 			E2.ajouterPoints(272);
@@ -198,16 +204,16 @@ void Belotte::jeu() {
 				val++;
 		}
 		if (coul != carreau)
-			coul++;
+			coul=coul+1;
 	}
 	Equipe E1(1, true);
 	Equipe E2(2, false);
 
 	//initialisation des 4 mains :
-	MainJoueur m1 (joueurs[0]);
-	MainJoueur m2 (joueurs[1]);
-	MainJoueur m3 (joueurs[2]);
-	MainJoueur m4 (joueurs[3]);
+	MainJoueur m1(joueurs[0]);
+	MainJoueur m2(joueurs[1]);
+	MainJoueur m3(joueurs[2]);
+	MainJoueur m4(joueurs[3]);
 	int i;
 	unsigned int pos;
 	srand ( time(NULL) );

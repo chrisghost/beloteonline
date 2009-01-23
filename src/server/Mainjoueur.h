@@ -9,6 +9,7 @@
 #include "carte.h"
 #include "Joueur.h"
 
+
 class MainJoueur {
 private:
 	Joueur joueur;
