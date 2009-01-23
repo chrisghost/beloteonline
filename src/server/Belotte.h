@@ -12,7 +12,6 @@
 #include <iostream>
 #include "Equipe.h"
 #include "Pli.h"
-#include "deftype.h"
 #include "Joueur.h"
 #include "Mainjoueur.h"
 
