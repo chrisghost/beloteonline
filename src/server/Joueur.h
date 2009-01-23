@@ -38,5 +38,4 @@ class Joueur {
 		 MainJoueur main;
 };
 
-
 #endif /* JOUEUR_H_ */
