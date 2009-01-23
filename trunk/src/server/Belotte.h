@@ -8,12 +8,14 @@
 #ifndef BELOTTE_H_
 #define BELOTTE_H_
 
-#include <vector>
-#include <iostream>
+
 #include "Equipe.h"
 #include "Pli.h"
 #include "Joueur.h"
 #include "Mainjoueur.h"
+#include "deftype.h"
+#include <vector>
+#include <iostream>
 
 class Belotte {
 
