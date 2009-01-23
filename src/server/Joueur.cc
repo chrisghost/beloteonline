@@ -35,7 +35,7 @@ Mainjoueur Joueur::getMain() {
 	return this->main;
 }
 
-Equipe Joueur::equipe() {
+Equipe Joueur::getEquipe() {
 	return equipe;
 }
 

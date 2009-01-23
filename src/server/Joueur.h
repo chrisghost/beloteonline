@@ -27,7 +27,7 @@ class Joueur {
 		int getId(); 			//retourne l'id du joueur
 		sf::IpAdress getIp();   //retourne l'ip du joueur
 		MainJoueur getMain();	//retourne la main du joueur
-		Equipe equipe();		//retourne l'équipe du joueur
+		Equipe getEquipe();		//retourne l'équipe du joueur
 		void setMain(MainJoueur m); //donne une nouvelle main au joueur
 
 	private :
