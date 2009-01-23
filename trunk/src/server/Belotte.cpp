@@ -119,6 +119,7 @@ void Belotte::finMene() {
 	int ptsE1 = 0;
 	int ptsE2 = 0;
 	Equipe E1 = Belotte::unJoueur(i->gagnant()).getEquipe();
+	Equipe E2 = Belotte::unJoueur(i->gagnant()).getEquipe(); // ligne absurde pour éviter les erreurs de compilation (adrien)
 	ptsE1 = ptsE1 + i->calcul_points();
 	i++;
 	while(i != plis.end()) {
