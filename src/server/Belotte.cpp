@@ -78,8 +78,6 @@ Carte Belotte::plusHaute(vector<Carte> cartes) {
 		return plusHaute;
 
 	}
-	else
-		return new Carte(NULL);
 }
 
 bool Belotte::estAtout(Carte carte) {
@@ -195,17 +193,18 @@ void Belotte::finMene() {
 
 void Belotte::jeu() {
 	vector<Carte> vectCartes;
-	Couleur coul = pique;
-	Valeur val = sept;
-	while (coul <= carreau) {
-		while (val <= as) {
-			Carte c (val, coul);
+	int coul = 1;
+	int val = 7;
+	while (coul <= 4) { // coul <= carreau
+		while (val <= 14) {// val <= 14
+			Carte c = Carte(Valeur(val), Couleur(coul));
 			vectCartes.push_back(c); //il faudrait randomiser le vecteur mais je sais pas encore comment
-			if (val != as)
-				val++;
+			if (val < 14)
+				val=val+1;
+			else
+				val=7;
 		}
-		if (coul != carreau)
-			coul=coul+1;
+		coul=coul+1;
 	}
 	Equipe E1(1, true);
 	Equipe E2(2, false);

@@ -7,11 +7,11 @@
 
 #ifndef BELOTTE_H_
 #define BELOTTE_H_
-#include "Equipe.h"
-#include "Mainjoueur.h"
+
 #include "Joueur.h"
+#include "Mainjoueur.h"
 
-
+#include "Equipe.h"
 #include "Pli.h"
 #include "deftype.h"
 #include <stdlib.h>

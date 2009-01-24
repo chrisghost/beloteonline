@@ -13,12 +13,15 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 
-//#include "Mainjoueur.h"
-
 using namespace std;
 
-class Equipe;
 class MainJoueur;
+#include "Mainjoueur.h"
+class Equipe;
+#include "Equipe.h"
+
+
+
 
 class Joueur {
 
@@ -36,9 +39,9 @@ class Joueur {
 	private :
 		//attributs
 		 int id;
-		 Equipe equipe;
 		 sf::IPAddress ip;
 		 MainJoueur main;
+		 Equipe equipe;
 };
 
 #endif /* JOUEUR_H_ */

@@ -1,13 +1,15 @@
 #ifndef MAINJOUEUR_H
 #define MAINJOUEUR_H
 
+class Joueur;
+#include "Joueur.h"
+
 #include <stdlib.h>
 #include <string>
 #include <iostream>
 #include <vector>
-
 #include "carte.h"
-#include "Joueur.h"
+
 
 
 class MainJoueur {

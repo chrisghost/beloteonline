@@ -1,15 +1,14 @@
 #ifndef CARTE_H
 #define CARTE_H
 
+class Belotte;
+#include "Belotte.h"
+
 #include "deftype.h"
 
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-
-class Belotte;
-#include "Belotte.h"
-
 
 class Carte {
 private:
