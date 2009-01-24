@@ -32,9 +32,9 @@ void Equipe::setPartante(bool nouvValeur) {
 /***********************************
  * Methodes
  ***********************************/
-void ajouterJoueur(Joueur joueur) {
+void Equipe::ajouterJoueur(Joueur joueur) {
 	if(joueurs.size() < 2)
-		joueurs.push_back(equipe);
+		joueurs.push_back(joueur);
 	else
 		cout << "Impossible d'ajouter plus de deux equipe a une partie." << endl;
 }
@@ -43,7 +43,7 @@ int Equipe::partenaire(int id){
 	if (joueurs.size() == 2)
 	{
 		if(id == joueurs[1].getId())
-			return joueur[2].getId();
+			return joueurs[2].getId();
 		else if(id == joueurs[2].getId())
 			return joueurs[1].getId();
 		else
@@ -56,10 +56,9 @@ int Equipe::partenaire(int id){
 Joueur Equipe::unJoueur(int id){
 	if (joueurs[1].getId() == id)
 		return joueurs[1];
-	else if (joueur[2].getId() == id)
+	else if (joueurs[2].getId() == id)
 		return joueurs[2];
-	else
-		return NULL;
+
 }
 
 void Equipe::ajouterPoints(int p) {

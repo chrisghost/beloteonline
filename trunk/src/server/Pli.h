@@ -20,7 +20,7 @@
 class Pli {
 private:
 	Couleur couleurDemandee;
-	vector<Carte> carteDuPli;
+	std::vector<Carte> carteDuPli;
 	Carte carteMaitre;
 public :
 	Pli();

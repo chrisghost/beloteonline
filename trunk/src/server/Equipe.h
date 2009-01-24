@@ -13,12 +13,13 @@
 #include <string>
 #include <iostream>
 #include <SFML/Network.hpp>
+#include <vector>
 
 
 class Equipe
 {
 	private :
-		vector<Joueur> joueurs;
+		std::vector<Joueur> joueurs;
 		int idEquipe ;
 		int points;
 		bool partante;

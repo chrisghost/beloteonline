@@ -3,10 +3,9 @@
 #include <iostream>
 #include <vector>
 
-#include "mainjoueur.h"
+#include "Mainjoueur.h"
 
-MainJoueur::MainJoueur(Joueur j) : joueur() {
-	joueur = j;
+MainJoueur::MainJoueur(Joueur j) {
 }
 
 bool MainJoueur::aLaCouleur(Couleur coul) {
