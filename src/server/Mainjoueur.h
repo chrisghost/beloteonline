@@ -14,8 +14,8 @@ class Joueur;
 
 class MainJoueur {
 private:
-	Joueur joueur;
-	vector<Carte> main;
+	std::vector<Carte> main;
+	Joueur * joueur;
 public:
 	MainJoueur(Joueur j);
 	bool aLaCouleur(Couleur coul); // Renvoie vrai si le joueur a au moins une carte de la couleur donnée dans sa main

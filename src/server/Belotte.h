@@ -7,24 +7,24 @@
 
 #ifndef BELOTTE_H_
 #define BELOTTE_H_
-
 #include "Joueur.h"
 #include "Mainjoueur.h"
 
 #include "Equipe.h"
 #include "Pli.h"
-#include "deftype.h"
+//#include "deftype.h"
 #include <stdlib.h>
 #include <vector>
 #include <iostream>
+#include "carte.h"
 
 class Belotte {
 
 	private:
 		//attributs
-		vector<Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
-		vector<Equipe> equipes;
-		vector<Joueur> joueurs;
+		std::vector <Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
+		std::vector <Equipe> equipes;
+		std::vector <Joueur> joueurs;
 		Couleur atout;
 		int pointsMax;
 		int preneur;
@@ -43,7 +43,7 @@ class Belotte {
 		//methodes
 		bool estAtout(Carte carte); 			//retourne vrai si la carte  est un atout
 		bool verifCarte(Carte carte); 			//retourne vrai si la carte peu etre jouee a ce moment de la partie
-		Carte plusHaute(vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
+		Carte plusHaute(std::vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
 		void ajouterEquipe(Equipe equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
 		Joueur unJoueur(int id);				//retourne le joueur de l'id si il existe, NULL sinon
 		void finMene();							//compte les points, les ajoute à l'équipe gagnante de la mène

@@ -15,7 +15,7 @@ private:
 	Valeur val;
 	Couleur coul;
 	int id_joueur;
-	Belotte belotte;
+
 public:
 
 	//constructeur

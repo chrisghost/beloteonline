@@ -26,8 +26,8 @@ void Carte::setJoueur(int id) {
 }
 
 bool Carte::operator<(Carte c) {
-	if (belotte.estAtout(c)) {
-		if (belotte.estAtout(this)) {
+	if (Belotte::estAtout(c)) {
+		if (Belotte::estAtout(this)) {
 			switch (val) {			// si les deux cartes sont atout
 			case valet:				// le valet est le plus fort
 				return false;
@@ -50,7 +50,7 @@ bool Carte::operator<(Carte c) {
 			return true;			// si seul c est atout
 	}
 	else {
-		if (belotte.estAtout(this))
+		if (Belotte::estAtout(this))
 			return false;			// si seul this est atout
 		else {
 			return (val < c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial
@@ -59,8 +59,8 @@ bool Carte::operator<(Carte c) {
 }
 
 bool Carte::operator>(Carte c) {
-	if (belotte.estAtout(c)) {
-		if (belotte.estAtout(this)) {
+	if (Belotte::estAtout(c)) {
+		if (Belotte::estAtout(this)) {
 			switch (val) {			// si les deux cartes sont atout
 			case valet:				// le valet est le plus fort
 				return true;
@@ -83,7 +83,7 @@ bool Carte::operator>(Carte c) {
 			return false;			// si seul c est atout
 	}
 	else {
-		if (belotte.estAtout(this))
+		if (Belotte::estAtout(this))
 			return true;			// si seul this est atout
 		else {
 			return (val > c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial

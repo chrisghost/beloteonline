@@ -12,7 +12,7 @@
  * Constructeur
  ***********************************/
 Belotte::Belotte(Couleur atout, int pointsMax, int preneur)
-	:equipes(), plis(), joueurs() {
+	:equipes(), joueurs() {
 	this->atout = atout;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
