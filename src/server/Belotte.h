@@ -9,6 +9,8 @@
 #define BELOTTE_H_
 #include "Joueur.h"
 #include "Mainjoueur.h"
+class Carte;
+#include "carte.h"
 
 #include "Equipe.h"
 #include "Pli.h"
@@ -16,7 +18,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <iostream>
-#include "carte.h"
+
 
 class Belotte {
 

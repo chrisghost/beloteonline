@@ -28,7 +28,7 @@ void Pli::ajouterCarte(Carte c) {
 
 }
 
-bool Pli::estAttout(c  carte ) {
+bool Pli::estAttout(Carte c) {
 	return (c.Couleur == getCouleur() );
 }
 
@@ -36,37 +36,37 @@ Carte Pli::maitre() {
 	return carteMaitre;
 }
 int Pli::convertionPoint(Carte c){
-	if (c.estAtout = true)
+	if (Belotte::estAtout(c))
 		{
-		if (c.Valeur=sept | huit)
+		if (c.getValeur()=sept | huit)
 			return 0;
-		else if ( c.Valeur = damme)
+		else if ( c.getValeur() = dame)
 			return 3;
-		else if ( c.Valeur = roi)
+		else if ( c.getValeur() = roi)
 					return 4;
-		else if ( c.Valeur = dix)
+		else if ( c.getValeur() = dix)
 					return 10;
-		else if ( c.Valeur = as)
+		else if ( c.getValeur() = as)
 					return 11;
-		else if ( c.Valeur = neuf)
+		else if ( c.getValeur() = neuf)
 					return 14;
-		else if ( c.Valeur = valet)
+		else if ( c.getValeur() = valet)
 					return 20;
 		}
 	else if  (c.estAtout = false)
-	{ if (c.Valeur=sept | huit)
+	{ if (c.getValeur()=sept | huit)
 		return 0;
-	else if ( c.Valeur = damme)
+	else if ( c.getValeur() = damme)
 		return 3;
-	else if ( c.Valeur = roi)
+	else if ( c.getValeur() = roi)
 				return 4;
-	else if ( c.Valeur = dix)
+	else if ( c.getValeur() = dix)
 				return 10;
-	else if ( c.Valeur = as)
+	else if ( c.getValeur() = as)
 				return 11;
-	else if ( c.Valeur = neuf)
+	else if ( c.getValeur() = neuf)
 				return 0;
-	else if ( c.Valeur = valet)
+	else if ( c.getValeur() = valet)
 				return 2;
 	}
 }
@@ -75,9 +75,9 @@ int Pli::calcul_points() { 	//retourne la valeur de toutes les cartes
 	int point =0;
 	//Carte cm= maitre();
 	vector<Carte>::iterator it;
-	for ( it=carteDePli.begin() ; it < carteDePli.end(); it++ )
+	for ( it=carteDuPli.begin() ; it < carteDuPli.end(); it++ )
 		{
-				point = point +convertionPoint( carteDePli[it]);
+				point = point + convertionPoint( carteDuPli.at(it));
 		}
 	return point;
 

@@ -48,7 +48,7 @@ bool Belotte::verifCarte(Carte carte) {
 		{
 			Joueur joueur = unJoueur(carte.getJoueur());
 			if(joueur.getId() == NULL){cout << "Erreur" << endl; return false;} //au cas ou
-			if(joueur.getMain().aLaCouleur(plis[pliEnCours].getCouleur())) //si le joueur a la couleur demandee il doit en jouer
+			if(joueur.getMain()->aLaCouleur(plis[pliEnCours].getCouleur())) //si le joueur a la couleur demandee il doit en jouer
 				return false;
 			else
 			{
@@ -56,7 +56,7 @@ bool Belotte::verifCarte(Carte carte) {
 					return true;
 				else
 				{
-					if(joueur.getMain().aLaCouleur(atout)) //si le joueur a un atout il doit en jouer
+					if(joueur.getMain()->aLaCouleur(atout)) //si le joueur a un atout il doit en jouer
 						return false;
 					else
 						return true;
@@ -210,10 +210,10 @@ void Belotte::jeu() {
 	Equipe E2(2, false);
 
 	//initialisation des 4 mains :
-	MainJoueur m1(joueurs[0]);
-	MainJoueur m2(joueurs[1]);
-	MainJoueur m3(joueurs[2]);
-	MainJoueur m4(joueurs[3]);
+	MainJoueur m1(&joueurs[0]);
+	MainJoueur m2(&joueurs[1]);
+	MainJoueur m3(&joueurs[2]);
+	MainJoueur m4(&joueurs[3]);
 	int i;
 	unsigned int pos;
 	srand ( time(NULL) );
