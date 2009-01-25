@@ -10,25 +10,25 @@ IG::~IG() {
 }
 
 
-Carte IG::demande_carte(vector<carte> main){
-	//affiche les 8 cartes de la main
+Carte IG::demande_Carte(vector<Carte> main){
+	//affiche les 8 Cartes de la main
 	int n=1;
 	cout << "Affichage de la main :" << endl;
-		for (i=0;i<main.size();i++){
+		for (int i=0;i < main.size();i++){
 			cout << "Carte n°" << n << endl;
-			afficher_unecarte(main[i]);
+			afficher_uneCarte(main[i]);
 			n=n+1;
 		}
 }
 
-void IG::afficher_carte(Carte c){
+void IG::afficher_Carte(Carte c){
 
-	cout << "La carte du joueur ";
-	cout << c.id_joueur;
+	cout << "La Carte du joueur ";
+	cout << c.getJoueur();
 	cout <<	" est le ";
-	cout << c.val;
+	cout << c.getValeur();
 	cout << " de ";
-	cout << c.coul << endl;
+	cout << c.getCouleur()<< endl;
 
 }
 
@@ -41,47 +41,46 @@ void IG::afficher_message(string mess) {
 }
 
 
-void IG::afficher_liste_joueurs(vector<joueur> joueur) {
+void IG::afficher_liste_joueurs(vector<Joueur> joueur) {
 	//affiche les joueurs présents dans la partie
 	cout << "Les joueurs présents sont ";
-	for (i=0; i<=joueur.size; i++) {
+	for (int i=0; i<=joueur.size(); i++) {
 		afficher_joueur(joueur[i]);
 	}
 }
 
 
-void IG::afficher_pli(vector<carte> pli){
-	//affiche les cartes jouées dans le pli
-	cout << "Les cartes du pli sont :" << endl;
-	for (i=0; i<=pli.size; i++) {
-		afficher_carte(pli[i]);
+void IG::afficher_pli(vector<Carte> pli){
+	//affiche les Cartes jouées dans le pli
+	cout << "Les Cartes du pli sont :" << endl;
+	for (int i=0; i<=pli.size(); i++) {
+		afficher_Carte(pli[i]);
 	}
 }
 
 
 Couleur IG::demander_couleur_atout() {
 
-	Couleur coul;
+	int coul;
 	cout << "Veuillez choisir une couleur: " << endl;
-	cout << carte.Couleur << endl;
 	cin >> coul;
-	return (coul);
+	return ((Couleur)coul);
 }
 
 
-void IG::afficher_unecarte(Carte c){
+void IG::afficher_uneCarte(Carte c){
 
-	cout << "La carte est le ";
-	cout << c.val;
+	cout << "La Carte est le ";
+	cout << c.getValeur();
 	cout << " de ";
-	cout << c.coul << endl;
+	cout << c.getCouleur() << endl;
 }
 
 
 void IG::afficher_joueur(Joueur j) {
 
 	cout << "Le joueur ";
-	cout << j.login;
+	cout << j.getLogin();
 	cout << "a l'id ";
-	cout << j.id;
+	cout << j.getId();
 }

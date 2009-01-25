@@ -15,11 +15,12 @@ private:
 	Valeur val;
 	Couleur coul;
 	int id_joueur;
+	Belotte * b;
 
 public:
 
 	//constructeur
-	Carte(Valeur val,Couleur coul);
+	Carte(Valeur val,Couleur coul, Belotte * b);
 
 	//methodes d'acces aux attributs de la classe
 	Couleur getCouleur();

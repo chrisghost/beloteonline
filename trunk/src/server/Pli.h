@@ -14,23 +14,24 @@
 
 #include "Equipe.h"
 #include "deftype.h"
+#include "Belotte.h"
 
 class Carte;
 #include "carte.h"
-#include "Belotte.h"
 
 class Pli {
 private:
 	Couleur couleurDemandee;
 	std::vector<Carte> carteDuPli;
-	Carte carteMaitre;
+	Carte * carteMaitre;
+	Belotte * b;
 
 public :
-	Pli();
+	Pli(Belotte * b);
 	Couleur getCouleur();//k
-	bool estAttout();//k
+	bool estAttout(Carte c);//k
 	void ajouter_carte(Carte c);//k
-	Carte  maitre();//renvoi la carte maitre
+	Carte * maitre();//renvoi la carte maitre
 	int convertionPoint(Carte c); //k
 	int calcul_points(); //k
 	int gagnant();//ok

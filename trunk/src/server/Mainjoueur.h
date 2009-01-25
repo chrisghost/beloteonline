@@ -8,9 +8,10 @@ class Joueur;
 #include <string>
 #include <iostream>
 #include <vector>
+
+class Carte;
 #include "carte.h"
-
-
+#include "deftype.h"
 
 class MainJoueur {
 private:

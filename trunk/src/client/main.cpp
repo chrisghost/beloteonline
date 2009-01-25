@@ -9,15 +9,16 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+class Client;
 #include "Client.h"
+#include "IG.h"
 
 /*
  *
  */
-int main(int argc, char** argv) {
+int main() {
 
-        Client c(1234);
-
+	Client c(1234);
     return (EXIT_SUCCESS);
 }
 
