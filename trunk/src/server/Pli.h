@@ -12,16 +12,19 @@
 #include <iostream>
 #include <vector>
 
-#include "carte.h"
-#include "Belotte.h"
 #include "Equipe.h"
 #include "deftype.h"
+
+class Carte;
+#include "carte.h"
+#include "Belotte.h"
 
 class Pli {
 private:
 	Couleur couleurDemandee;
 	std::vector<Carte> carteDuPli;
 	Carte carteMaitre;
+
 public :
 	Pli();
 	Couleur getCouleur();//k

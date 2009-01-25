@@ -5,7 +5,8 @@
 
 #include "Mainjoueur.h"
 
-MainJoueur::MainJoueur(Joueur j) {
+MainJoueur::MainJoueur(Joueur * j) {
+joueur = j;
 }
 
 bool MainJoueur::aLaCouleur(Couleur coul) {

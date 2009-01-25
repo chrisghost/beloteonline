@@ -12,8 +12,8 @@
 /***********************************
  * Constructeur
  ***********************************/
-Joueur::Joueur(int id, sf::IPAdress ip, Equipe E)
-	:MainJoueur(this){
+Joueur::Joueur(int id, sf::IPAddress ip, Equipe E): equipe(-1,false){
+	main = new MainJoueur(this);
 	this->id = id;
 	this->ip = ip;
 	this->equipe = E;
@@ -27,11 +27,11 @@ int Joueur::getId() {
 	return this->id;
 }
 
-sf::IPAdress Joueur::getIp() {
+sf::IPAddress Joueur::getIp() {
 	return this->ip;
 }
 
-Mainjoueur Joueur::getMain() {
+MainJoueur * Joueur::getMain() {
 	return this->main;
 }
 
@@ -39,6 +39,6 @@ Equipe Joueur::getEquipe() {
 	return equipe;
 }
 
-void Joueur::setMain(MainJoueur m) {
+void Joueur::setMain(MainJoueur * m) {
 	this->main = m;
 }
