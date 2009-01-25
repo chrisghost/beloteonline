@@ -1,5 +1,5 @@
 #include "Server.h"
-#include "netstruct.h"
+#include "../netstruct.h"
 
 ////////////////////////////////////////////////////////////
 
@@ -48,6 +48,8 @@ Server::Server(unsigned short Port)
                     // Extract the message and display it
 			        packet_client st;
                     Packet >> st;
+
+
                     std::cout << "Client : " << st.log << " envoie la carte : " << st.val
 						<< " de " << st.couleur << std::endl;
                 }
@@ -59,14 +61,6 @@ Server::Server(unsigned short Port)
 			}
 		}
 	}
-}
-
-bool Server::connecter(){
-	sf::Packet RegularPacket;
-    if (sServer.Receive(RegularPacket) != sf::Socket::Done)
-        return false;
-
-    return true;
 }
 
 Server::~Server()

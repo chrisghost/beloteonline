@@ -4,9 +4,10 @@
 
 #include "carte.h"
 
-Carte::Carte(Valeur val,Couleur coul) {
+Carte::Carte(Valeur val,Couleur coul, Belotte * b) {
 	this->val = val;
 	this->coul = coul;
+	this->b =b;
 }
 
 Couleur Carte::getCouleur() {
@@ -26,8 +27,8 @@ void Carte::setJoueur(int id) {
 }
 
 bool Carte::operator<(Carte c) {
-	if (Belotte::estAtout(c)) {
-		if (Belotte::estAtout(this)) {
+	if (b->estAtout(&c)) {
+		if (b->estAtout(this)) {
 			switch (val) {			// si les deux cartes sont atout
 			case valet:				// le valet est le plus fort
 				return false;
@@ -50,7 +51,7 @@ bool Carte::operator<(Carte c) {
 			return true;			// si seul c est atout
 	}
 	else {
-		if (Belotte::estAtout(this))
+		if (b->estAtout(this))
 			return false;			// si seul this est atout
 		else {
 			return (val < c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial
@@ -59,8 +60,8 @@ bool Carte::operator<(Carte c) {
 }
 
 bool Carte::operator>(Carte c) {
-	if (Belotte::estAtout(c)) {
-		if (Belotte::estAtout(this)) {
+	if (b->estAtout(&c)) {
+		if (b->estAtout(this)) {
 			switch (val) {			// si les deux cartes sont atout
 			case valet:				// le valet est le plus fort
 				return true;
@@ -83,7 +84,7 @@ bool Carte::operator>(Carte c) {
 			return false;			// si seul c est atout
 	}
 	else {
-		if (Belotte::estAtout(this))
+		if (b->estAtout(this))
 			return true;			// si seul this est atout
 		else {
 			return (val > c.getValeur());		// si les deux cartes ne sont pas atout, on garde l'ordre des cartes initial

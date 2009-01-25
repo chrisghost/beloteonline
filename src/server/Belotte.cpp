@@ -80,8 +80,8 @@ Carte Belotte::plusHaute(vector<Carte> cartes) {
 	}
 }
 
-bool Belotte::estAtout(Carte carte) {
-	if(carte.getCouleur() == atout)
+bool Belotte::estAtout(Carte * carte) {
+	if(carte->getCouleur() == atout)
 		return true;
 	else
 		return false;
@@ -105,7 +105,7 @@ Joueur Belotte::unJoueur(int id) {
 	else{
 		Equipe e(-1,false);
 		sf::IPAddress ip("localhost");
-		Joueur j(-1, ip, e);
+		Joueur j(-1, ip, e, "");
 		return j;
 	}
 }
@@ -197,7 +197,7 @@ void Belotte::jeu() {
 	int val = 7;
 	while (coul <= 4) { // coul <= carreau
 		while (val <= 14) {// val <= 14
-			Carte c = Carte(Valeur(val), Couleur(coul));
+			Carte c = Carte(Valeur(val), Couleur(coul), this);
 			vectCartes.push_back(c); //il faudrait randomiser le vecteur mais je sais pas encore comment
 			if (val < 14)
 				val=val+1;

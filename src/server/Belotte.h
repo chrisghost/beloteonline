@@ -13,6 +13,7 @@ class Carte;
 #include "carte.h"
 
 #include "Equipe.h"
+class Pli;
 #include "Pli.h"
 //#include "deftype.h"
 #include <stdlib.h>
@@ -43,7 +44,7 @@ class Belotte {
 		void ajouterJoueur(Joueur j);
 
 		//methodes
-		bool estAtout(Carte carte); 			//retourne vrai si la carte  est un atout
+		bool estAtout(Carte * carte); 			//retourne vrai si la carte  est un atout
 		bool verifCarte(Carte carte); 			//retourne vrai si la carte peu etre jouee a ce moment de la partie
 		Carte plusHaute(std::vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
 		void ajouterEquipe(Equipe equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
