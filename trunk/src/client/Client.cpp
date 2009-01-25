@@ -19,8 +19,14 @@ Client::Client(unsigned short Port)
         return;}
     cout << "Connected to server " << ServerAddress << endl;
 
-    	this->Connexion();
+    	sf::Packet re;
+    	if( sClient.Receive(re) == sf::Socket::Done){
+    		packet_serveur pk;
+    		re >> pk;
+			this->id_j = pk.id_j;
+    	}
 
+    	this->Connexion();
 }
 
 bool Client::Connexion(){
@@ -29,13 +35,12 @@ bool Client::Connexion(){
         cin >> login;
         cin.ignore(1000, '\n');
 
-    	packet_client pk = {1 , login , id_j , sept, carreau , false , carreau};
+    	packet_client pk = {1 , login , this->id_j , sept, carreau , false , carreau};
 
         sf::Packet Packet;
 
         Packet << pk;
     return (sClient.Send(Packet) == sf::Socket::Done);
-    // RECUPERE LE PACKET DEPUIS LE SERVER AVEC L ID JOUEUR
 }
 bool Client::envoyer_carte(Carte c){// ID = 2
 	packet_client pk = {2 , "" , id_j , c.getValeur() , c.getCouleur() , false , carreau};
