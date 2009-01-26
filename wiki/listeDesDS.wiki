@@ -4,21 +4,21 @@ Les DS à faire ( complétez au fur et à mesure que vous avez des idées )
 
 *dans le désordre :
 
-#Connections : le handshaking ou un truc du genre
+# Connections : le handshaking ou un truc du genre
 
-#jouer une carte, coté client
+# jouer une carte, coté client
 
-#décompte des points : finMene()
+# décompte des points : finMene()
 
-#déroulement de la partie, cote server jeu() -> celui là sera enorme
+# déroulement de la partie, cote server jeu() -> celui là sera enorme
 
 
 
 
 *bas niveau 
 
-#pli()
+# pli()
 
-#belote()
+# belote()
 
-#distribution des cartes
+# distribution des cartes
