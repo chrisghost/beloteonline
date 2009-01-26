@@ -14,7 +14,6 @@ class MainJoueur;
 #include "Belotte.h"
 #include <string>
 #include <iostream>
-#include <SFML/Network.hpp>
 
 using namespace std;
 
@@ -26,12 +25,11 @@ class Joueur {
 
 	public :
 		//constructeur
-		Joueur(int id, sf::IPAddress ip, Equipe E, string login);
+		Joueur(int id, Equipe E, string login);
 
 		//methodes d'acces aux attributs de la classe
 		int getId(); 			//retourne l'id du joueur
 		inline string getLogin(){return login;}
-		sf::IPAddress getIp();   //retourne l'ip du joueur
 		MainJoueur * getMain();	//retourne la main du joueur
 		Equipe getEquipe();		//retourne l'équipe du joueur
 		void setMain(MainJoueur * m); //donne une nouvelle main au joueur
@@ -40,7 +38,6 @@ class Joueur {
 		//attributs
 		 int id;
 		 string login;
-		 sf::IPAddress ip;
 		 MainJoueur * main;
 		 Equipe * equipe;
 };

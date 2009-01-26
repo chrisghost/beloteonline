@@ -12,10 +12,9 @@
 /***********************************
  * Constructeur
  ***********************************/
-Joueur::Joueur(int id, sf::IPAddress ip, Equipe E, string login){
+Joueur::Joueur(int id, Equipe E, string login){
 	main = new MainJoueur(this);
 	this->id = id;
-	this->ip = ip;
 	this->equipe = &E;
 	this->login = login;
 }
@@ -28,9 +27,6 @@ int Joueur::getId() {
 	return this->id;
 }
 
-sf::IPAddress Joueur::getIp() {
-	return this->ip;
-}
 
 MainJoueur * Joueur::getMain() {
 	return this->main;
