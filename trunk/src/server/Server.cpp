@@ -44,8 +44,9 @@ Server::Server(unsigned short Port, Belotte * b)
 				//pl.id << pl.log << pl.id_j << pl.message << pl.val << pl.couleur << pl.demande << pl.couleur_att
 				//<< pl.valid << pl.nb_cartes << pl.vals << pl.couls << pl.points;
 
-				packet_serveur pk = {1 , "" , nb_cl_connected , "", sept, carreau, 0, carreau, false, 0,{sept,sept,sept,sept,sept},
-						{carreau,carreau,carreau,carreau,carreau},{0,0}};
+				packet_serveur pk = {1 , "" , nb_cl_connected , "", sept, carreau, 0, carreau, false, 0,
+						{sept,sept,sept,sept,sept,sept,sept,sept},
+						{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
 		        sf::Packet Packet;
 		        Packet << pk;
 				Client[nb_cl_connected].Send(Packet);
@@ -74,13 +75,16 @@ Server::Server(unsigned short Port, Belotte * b)
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la carte "<< st.val
 								<< " de " << st.couleur << std::endl;
 							Carte cc = Carte(st.val, st.couleur, this->b);
+							b->retour_carte(cc);
 							break;
 						case 3 ://Reponse
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") répond "<< st.reponse << std::endl;
+							b->retour_reponse(st.reponse);
 							break;
 						case 4 ://Couleur attout
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la couleur "<<
 								st.couleur << std::endl;
+							b->retour_couleur(st.couleur);
 							break;
 
 
@@ -102,8 +106,9 @@ Server::~Server()
 void Server::proposerCarte(Carte c, int id){
 	//    return Packet << pl.id << pl.log << pl.id_j << pl.message << pl.val << pl.couleur << pl.demande << pl.couleur_att
 	//<< pl.valid << pl.nb_cartes << pl.vals << pl.couls << pl.points;
-	packet_serveur pk = { 3, "" , id , "", c.getValeur() , c.getCouleur(), 1, carreau, false ,0, {sept,sept,sept,sept,sept},
-			{carreau,carreau,carreau,carreau,carreau},{0,0}};
+	packet_serveur pk = { 3, "" , id , "", c.getValeur() , c.getCouleur(), 1, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
 
     Packet << pk;
@@ -113,8 +118,9 @@ void Server::proposerCarte(Carte c, int id){
 
 void Server::demander_couleur(int id){
 
-	packet_serveur pk = { 4, "" , id , "", sept , carreau, 2, carreau, false ,0, {sept,sept,sept,sept,sept},
-			{carreau,carreau,carreau,carreau,carreau},{0,0}};
+	packet_serveur pk = { 4, "" , id , "", sept , carreau, 2, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
 
     Packet << pk;
@@ -123,6 +129,53 @@ void Server::demander_couleur(int id){
 
 }
 
-void Server::envoyer_liste_joueurs(int nb){
+void Server::envoyer_liste_joueurs(int id_client, int id_j, string l){
+
+	packet_serveur pk = { 4, l , id_j , "", sept , carreau, 2, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[id].Send(Packet);
 
 }
+
+void Server::envoyer_main(MainJoueur m, int idj){
+	vector<Carte> main = m.getCartes();
+	Couleur couls[8];
+	Valeur vals[8];
+	for(unsigned int i = 0; i< main.size(); i++){
+		couls[i] = main[i].getCouleur();
+		vals[i] = main[i].getValeur();
+	}
+	int nb_cartes = i+1;
+
+	while(i<8){
+		couls[i] = main[i].getCouleur();
+		vals[i] = main[i].getValeur();
+	}
+
+	packet_serveur pk = { 7, "" , idj , "", sept , carreau, 0, carreau, false ,nb_cartes,
+			vals,couls, {0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[idj].Send(Packet);
+
+}
+
+void Server::envoyer_message(string mess, int idj){
+
+}
+void Server::envoyer_demande(int demande, int idj);
+
+void Server::envoyer_atout_tous(Couleur atout);
+void Server::envoyer_atout(Couleur atout, int idj);
+
+void Server::envoyer_validation(bool Valid, int idj);
+
+void Server::envoyer_points_tous(int points[2]);
+void Server::envoyer_points(int points[2], int idj);

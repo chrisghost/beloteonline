@@ -15,8 +15,19 @@ public:
 	virtual ~Server();
 	void proposerCarte(Carte c, int id);
 	void demander_couleur(int id);
+	void envoyer_liste_joueurs(int id_client, int id_j, string l);
+	void envoyer_main(MainJoueur m, int idj);
+	void envoyer_message(string mess, int idj);
+	void envoyer_demande(int demande, int idj);
 
-	//methode pour afficher à chaque joueur la carte pour qu'ils choisissent si ils la prennent ou non (renvoie l'adresse du joueur ou null si personne la prend)
+	void envoyer_atout_tous(Couleur atout);
+	void envoyer_atout(Couleur atout, int idj);
+
+	void envoyer_validation(bool Valid, int idj);
+
+	void envoyer_points_tous(int points[2]);
+	void envoyer_points(int points[2], int idj);
+
 private:
 	Belotte * b;
 	sf::SocketTCP sServer;
