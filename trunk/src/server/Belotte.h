@@ -31,6 +31,7 @@ class Belotte {
 		std::vector <Equipe> equipes;
 		std::vector <Joueur> joueurs;
 		Couleur atout;
+		bool atout_defini;
 		int pointsMax;
 		int preneur;
 		int pliEnCours;
@@ -40,6 +41,7 @@ class Belotte {
 		bool rep;
 		Carte * c;
 		Couleur * coul;
+		int id_preneur;
 
 	public:
 
