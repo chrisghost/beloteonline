@@ -9,14 +9,14 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include "Server.h"
+#include "Belotte.h"
 
 /*
  *
  */
 int main(int argc, char** argv) {
 
-        Server s(1234);
+        Belotte b(2000);
 
     return (EXIT_SUCCESS);
 }
