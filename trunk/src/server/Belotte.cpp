@@ -6,6 +6,7 @@
  */
 
 #include "Belotte.h"
+#include <SFML/Network.hpp>
 #include <stdlib.h>
 #include <time.h>
 
@@ -115,8 +116,7 @@ Joueur Belotte::unJoueur(int id) {
 	}
 	else{
 		Equipe e(-1,false);
-		sf::IPAddress ip("localhost");
-		Joueur j(-1, ip, e, "");
+		Joueur j(-1, e, "");
 		return j;
 	}
 }

@@ -16,6 +16,7 @@ class Carte;
 class Pli;
 #include "Pli.h"
 //#include "deftype.h"
+class Server;
 #include "Server.h"
 #include <stdlib.h>
 #include <vector>
