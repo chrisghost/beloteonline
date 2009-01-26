@@ -23,6 +23,11 @@ Server::Server(unsigned short Port, Belotte * b)
 	// Add the listener
 	Selector.Add(sServer);
 
+
+	Equipe e1(1, false);
+	Equipe e2(2, false);
+
+
 	// Loop while... we close the program :)
 	while (true)
 	{
@@ -45,8 +50,12 @@ Server::Server(unsigned short Port, Belotte * b)
 
 				clients[nb_cl_connected] = Address;
 
-				//pl.id << pl.log << pl.id_j << pl.message << pl.val << pl.couleur << pl.demande << pl.couleur_att
-				//<< pl.valid << pl.nb_cartes << pl.vals << pl.couls << pl.points;
+				if(nb_cl_connected<2){
+					Joueur j(nb_cl_connected, Address, e1, "");
+					b->ajouterJoueur(j);}
+				else{
+					Joueur j(nb_cl_connected, Address, e2, "");
+					b->ajouterJoueur(j);}
 
 				packet_serveur pk = {1 , "" , nb_cl_connected , "", sept, carreau, 0, carreau, false, 0,
 						{sept,sept,sept,sept,sept,sept,sept,sept},
@@ -75,12 +84,12 @@ Server::Server(unsigned short Port, Belotte * b)
 							std::cout << "Le client " << st.id_j <<" s'apelle " << st.log << std::endl;
 							login[st.id_j] = st.log;
 							break;
-						case 2 ://Carte
+						case 2 :{//Carte
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la carte "<< st.val
 								<< " de " << st.couleur << std::endl;
-							Carte cc = Carte(st.val, st.couleur, this->b);
+							Carte cc(st.val, st.couleur, this->b);
 							b->retour_carte(cc);
-							break;
+							break;}
 						case 3 ://Reponse
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") répond "<< st.reponse << std::endl;
 							b->retour_reponse(st.reponse);
@@ -154,7 +163,8 @@ void Server::envoyer_main(MainJoueur m, int idj){
 	vector<Carte> main = m.getCartes();
 	Couleur couls[8];
 	Valeur vals[8];
-	for(unsigned int i = 0; i< main.size(); i++){
+	unsigned int i;
+	for(i = 0; i< main.size(); i++){
 		couls[i] = main[i].getCouleur();
 		vals[i] = main[i].getValeur();
 	}
@@ -166,7 +176,7 @@ void Server::envoyer_main(MainJoueur m, int idj){
 	}
 
 	packet_serveur pk = { 7, "" , idj , "", sept , carreau, 0, carreau, false ,nb_cartes,
-			vals,couls, {0,0}};
+			{* vals}, {* couls}, {0,0}};
     sf::Packet Packet;
 
     Packet << pk;
@@ -177,7 +187,7 @@ void Server::envoyer_main(MainJoueur m, int idj){
 
 void Server::envoyer_message(string mess, int idj){
 
-	packet_serveur pk = { 2, mess , id , "", sept , carreau, 2, carreau, false ,0,
+	packet_serveur pk = { 2, mess , idj , "", sept , carreau, 2, carreau, false ,0,
 			{sept,sept,sept,sept,sept,sept,sept,sept},
 			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
@@ -188,7 +198,7 @@ void Server::envoyer_message(string mess, int idj){
 }
 void Server::envoyer_demande(int demande, int idj){
 
-	packet_serveur pk = { 4, "" , id , "", sept , carreau, demande, carreau, false ,0,
+	packet_serveur pk = { 4, "" , idj , "", sept , carreau, demande, carreau, false ,0,
 			{sept,sept,sept,sept,sept,sept,sept,sept},
 			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
@@ -204,7 +214,7 @@ void Server::envoyer_atout_tous(Couleur atout){
 }
 void Server::envoyer_atout(Couleur atout, int idj){
 
-	packet_serveur pk = { 5, "" , id , "", sept , carreau, 2, atout, false ,0,
+	packet_serveur pk = { 5, "" , idj , "", sept , carreau, 2, atout, false ,0,
 			{sept,sept,sept,sept,sept,sept,sept,sept},
 			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
@@ -216,7 +226,7 @@ void Server::envoyer_atout(Couleur atout, int idj){
 
 void Server::envoyer_validation(bool Valid, int idj){
 
-	packet_serveur pk = { 6, "" , id , "", sept , carreau, 2, carreau, Valid ,0,
+	packet_serveur pk = { 6, "" , idj , "", sept , carreau, 2, carreau, Valid ,0,
 			{sept,sept,sept,sept,sept,sept,sept,sept},
 			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
     sf::Packet Packet;
@@ -232,9 +242,9 @@ void Server::envoyer_points_tous(int points[2]){
 }
 void Server::envoyer_points(int points[2], int idj){
 
-	packet_serveur pk = { 8, "" , id , "", sept , carreau, 2, carreau, false ,0,
+	packet_serveur pk = { 8, "" , idj , "", sept , carreau, 2, carreau, false ,0,
 			{sept,sept,sept,sept,sept,sept,sept,sept},
-			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},points};
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau}, {points[0],points[1]}};
     sf::Packet Packet;
 
     Packet << pk;

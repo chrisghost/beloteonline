@@ -24,7 +24,7 @@ public:
 	void ajouterCarte(Carte c); // Ajoute une carte à la main du joueur
 	void retirerCarte(Carte c); // Retire une carte de la main du joueur
 
-	inline void getCartes(){return main;}
+	inline std::vector<Carte> getCartes(){return main;}
 };
 
 #endif // MAINJOUEUR_H
