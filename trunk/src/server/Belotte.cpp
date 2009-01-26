@@ -37,6 +37,12 @@ void Belotte::setAtout(Couleur atout) {
 
 void Belotte::ajouterJoueur(Joueur j) {
 	joueurs.push_back(j);
+	if (equipes.size() == 0) {
+		equipes.push_back(j.getEquipe());
+	}
+	else if (equipes.size() == 1 && j.getEquipe().getId() != equipes[0].getId()) {
+		equipes.push_back(j.getEquipe());
+	}
 }
 
 /***********************************
@@ -197,6 +203,7 @@ void Belotte::finMene() {
 }
 
 void Belotte::jeu() {
+do {
 	vector<Carte> vectCartes;
 	int coul = 1;
 	int val = 7;
@@ -289,6 +296,7 @@ void Belotte::jeu() {
 	}
 
 	if (this->atout_defini){ //une fois l'atout défini, on fini de distribuer :
+		unJoueur(this->id_preneur).getEquipe().setPartante(true);
 		switch (this->id_preneur) {
 			case 1 :
 				m1.ajouterCarte(car);
@@ -420,26 +428,32 @@ void Belotte::jeu() {
 			Pli * p = new Pli(this);
 			int r = this->id_preneur;
 			for (int l =0; l < 4; l++){
-				Carte carte_jouee;
+				Carte * carte_jouee;
 				do {
 					s->envoyer_demande(3, r);
-					carte_jouee = attendre_carte();
-				} while (!this->verifCarte(carte_jouee));
-				joueurs[r].getMain()->retirerCarte(carte_jouee);
-				s->envoyer_main(*(joueurs[r].getMain()));
-				p->ajouter_carte(carte_jouee);
-				if (carte_jouee == this->plusHaute(p->getVectCarte())) {
-					this->id_preneur = r;
+					*carte_jouee = attendre_carte();
+				} while (!this->verifCarte(*carte_jouee));
+				joueurs[r].getMain()->retirerCarte(*carte_jouee);
+				s->envoyer_main(*joueurs[r].getMain(), r);
+				p->ajouter_carte(*carte_jouee);
+				if (*carte_jouee == this->plusHaute(p->getVectCarte())) {
+					this->setPreneur(r);
 				}
-				r = (r++) % 4;
+				r++;
+				r = (r) % 4;
 			}
-			plis.push_back(p);
+			plis.push_back(*p);
 		}
-
+		finMene();
 	}
+} while (!this->partieFinie());
 }
 
-void wait (int secondes)
+bool Belotte::partieFinie() {
+	return (equipes[0].getPts()>this->pointsMax || equipes[1].getPts()>this->pointsMax);
+}
+
+void Belotte::wait (int secondes)
 {
   clock_t endwait;
   endwait = clock () + secondes * CLOCKS_PER_SEC ;
