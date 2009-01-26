@@ -46,7 +46,7 @@ class Belotte {
 	public:
 
 		//constructeur
-		Belotte(Couleur atout, int pointsMax, int preneur);
+		Belotte(int pointsMax, int preneur);
 
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
