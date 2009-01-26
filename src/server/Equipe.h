@@ -30,6 +30,7 @@ class Equipe
 		Equipe(int idEquipe, bool partante);
 
 		//methodes d'acces aux attributs de la classe
+		inline int getPts(){return points;}
 		inline int getId(){return idEquipe;}
 		bool estPartante(); //retourne vrai si l'equipe est partante et faux sinon
 		void setPartante(bool nouvValeur); //modifie la valeur de l'attribut partante

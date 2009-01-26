@@ -62,6 +62,7 @@ class Belotte {
 												// et vide le vecteur de plis pour commencer une nouvelle mène
 		void jeu(); 							//methode qui gere tout le déroulement du jeu (distribution des cartes,
 												//choix de l'atout par les joueurs, passage d'une mène à une autre, etc ...)
+		bool partieFinie();						//renvoie vrai si l'une des équipes a atteint le nb de point maximal
 
 		//méthodes relatives au module client-serveur
 		void wait(int secondes);
