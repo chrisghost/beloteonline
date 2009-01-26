@@ -37,12 +37,14 @@ class Belotte {
 
 		//attributs pour les échanges avec le serveur
 		Server * s;
-		int rep;
+		bool rep;
+		Carte * c;
+		Couleur * coul;
 
 	public:
 
 		//constructeur
-		Belotte(Couleur atout, int pointsMax, int preneur, Server * s);
+		Belotte(Couleur atout, int pointsMax, int preneur);
 
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
@@ -59,9 +61,15 @@ class Belotte {
 												// et vide le vecteur de plis pour commencer une nouvelle mène
 		void jeu(); 							//methode qui gere tout le déroulement du jeu (distribution des cartes,
 												//choix de l'atout par les joueurs, passage d'une mène à une autre, etc ...)
+
+		//méthodes relatives au module client-serveur
 		void wait(int secondes);
-		bool s_attendreReponse();				//attend la réponse à une demande au client
-		void reponse(int rep);					//méthode appelée par server pour envoyer la réponse
+		Carte attendre_carte();					//attend la carte demandée au client
+		bool attendre_reponse();				//attend la réponse demandée au client
+		Couleur attendre_couleur();				//attend la couleur demandée au client
+		void retour_carte(Carte car);			//méthode appelée par server pour passer une carte
+		void retour_reponse (bool rep);			//méthode appelée par server pour passer une réponse
+		void retour_couleur(Couleur coul);		//méthode appelée par server pour passer une couleur
 };
 
 #endif /*BELOTTE_H_*/

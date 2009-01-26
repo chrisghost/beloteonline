@@ -12,9 +12,9 @@
 /***********************************
  * Constructeur
  ***********************************/
-Belotte::Belotte(Couleur atout, int pointsMax, int preneur, Server * s)
+Belotte::Belotte(Couleur atout, int pointsMax, int preneur)
 	:equipes(), joueurs(){
-	this->s = s;
+	this->s = new Server(1234, this);
 	this->rep = 0;
 	this->atout = atout;
 	this->pointsMax = pointsMax;
@@ -247,6 +247,25 @@ void Belotte::jeu() {
 	vectCartes.erase(vectCartes.begin()+pos);
 
 	//On montre la carte à tous les joueurs et ils décident s'ils la choisissent :
+	bool prise = false;
+	int num = 0;
+	while (!prise && num!= 4) {
+		bool b = s->proposerCarte(car, num);
+		prise = this->attendre_reponse();
+		num++;
+	}
+	if (!prise) {
+		num = 0;
+		while (!prise && num!=4) {
+			bool b = s->proposerCarte(car, num);
+			prise = this->attendre_reponse();
+			if (prise) {
+				coul = s->demander_couleur(num);
+
+			}
+			num++;
+		}
+	}
 
 }
 
@@ -257,15 +276,55 @@ void wait (int secondes)
   while (clock() < endwait) {}
 }
 
-bool Belotte::s_attendreReponse() {
+bool Belotte::attendre_reponse() {
+	int i = 0;
 	while (this->rep == 0) {
 		wait(3);
+		i++;
+		if (i == 10) {
+			cout << "Erreur : réponse non arrivée" << endl;
+			exit(0);
+		}
 	}
 	int r = rep;
 	this->rep = 0;
 	return (r);
 }
 
-void Belotte::reponse(int rep) {
+Carte Belotte::attendre_carte() {
+	int i = 0;
+	while (this->c == NULL) {
+		wait(3);
+		i++;
+		if (i == 10) {
+			cout << "Erreur : carte non arrivée" << endl;
+			exit(0);
+		}
+	}
+	return (this->c);
+}
+
+Couleur Belotte::attendre_couleur() {
+	int i = 0;
+	while (this->coul == NULL) {
+		wait(3);
+		i++;
+		if (i == 10) {
+			cout << "Erreur : carte non arrivée" << endl;
+			exit(0);
+		}
+	}
+	return (this->coul);
+}
+
+void Belotte::retour_reponse(bool rep) {
 	this->rep = rep;
+}
+
+void Belotte::retour_carte(Carte car) {
+	this->c = car;
+}
+
+void Belotte::retour_couleur(Couleur coul) {
+	this->coul = coul;
 }
