@@ -3,8 +3,9 @@
 
 ////////////////////////////////////////////////////////////
 
-Server::Server(unsigned short Port)
+Server::Server(unsigned short Port, Belotte * b)
 {
+	this->b = b;
 	// Create a socket for listening to incoming connections
 	if (!sServer.Listen(Port))
 		return;
@@ -72,10 +73,10 @@ Server::Server(unsigned short Port)
 						case 2 ://Carte
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la carte "<< st.val
 								<< " de " << st.couleur << std::endl;
+							Carte cc = Carte(st.val, st.couleur, this->b);
 							break;
 						case 3 ://Reponse
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") répond "<< st.reponse << std::endl;
-
 							break;
 						case 4 ://Couleur attout
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la couleur "<<
@@ -97,4 +98,31 @@ Server::Server(unsigned short Port)
 
 Server::~Server()
 {
+}
+void Server::proposerCarte(Carte c, int id){
+	//    return Packet << pl.id << pl.log << pl.id_j << pl.message << pl.val << pl.couleur << pl.demande << pl.couleur_att
+	//<< pl.valid << pl.nb_cartes << pl.vals << pl.couls << pl.points;
+	packet_serveur pk = { 3, "" , id , "", c.getValeur() , c.getCouleur(), 1, carreau, false ,0, {sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[id].Send(Packet);
+}
+
+void Server::demander_couleur(int id){
+
+	packet_serveur pk = { 4, "" , id , "", sept , carreau, 2, carreau, false ,0, {sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[id].Send(Packet);
+
+}
+
+void Server::envoyer_liste_joueurs(int nb){
+
 }
