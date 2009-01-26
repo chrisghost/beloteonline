@@ -7,6 +7,7 @@
 
 #include "Belotte.h"
 #include <stdlib.h>
+#include <time.h>
 
 /***********************************
  * Constructeur
@@ -14,6 +15,7 @@
 Belotte::Belotte(Couleur atout, int pointsMax, int preneur, Server * s)
 	:equipes(), joueurs() {
 	this->s = s;
+	this->rep = 0;
 	this->atout = atout;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
@@ -248,12 +250,22 @@ void Belotte::jeu() {
 
 }
 
+void wait (int secondes)
+{
+  clock_t endwait;
+  endwait = clock () + secondes * CLOCKS_PER_SEC ;
+  while (clock() < endwait) {}
+}
+
 bool Belotte::s_attendreReponse() {
-	while (this->reponse == 0) {
-		;
+	while (this->rep == 0) {
+		wait(3);
 	}
+	int r = rep;
+	this->rep = 0;
+	return (r);
 }
 
 void Belotte::reponse(int rep) {
-	this->reponse = rep;
+	this->rep = rep;
 }
