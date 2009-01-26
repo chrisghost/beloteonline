@@ -15,7 +15,7 @@ public:
 	virtual ~Server();
 	void proposerCarte(Carte c, int id);
 	void demander_couleur(int id);
-	void envoyer_liste_joueurs(int id_client, int id_j, string l);
+	void envoyer_liste_joueurs();
 	void envoyer_main(MainJoueur m, int idj);
 	void envoyer_message(string mess, int idj);
 	void envoyer_demande(int demande, int idj);
