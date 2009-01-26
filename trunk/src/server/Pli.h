@@ -28,6 +28,7 @@ private:
 
 public :
 	Pli(Belotte * b);
+	std::vector<Carte> getVectCarte();
 	Couleur getCouleur();//k
 	bool estAttout(Carte c);//k
 	void ajouter_carte(Carte c);//k

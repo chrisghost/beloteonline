@@ -33,7 +33,6 @@ class Belotte {
 		Couleur atout;
 		bool atout_defini;
 		int pointsMax;
-		int preneur;
 		int pliEnCours;
 
 		//attributs pour les échanges avec le serveur
@@ -46,7 +45,7 @@ class Belotte {
 	public:
 
 		//constructeur
-		Belotte(int pointsMax, int preneur);
+		Belotte(int pointsMax);
 
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
