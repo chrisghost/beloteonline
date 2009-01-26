@@ -28,7 +28,7 @@ Belotte::Belotte(int pointsMax)
  * Methodes d'acces aux atributs
  ***********************************/
 void Belotte::setPreneur(int preneur) {
-	this->preneur = preneur;
+	this->id_preneur = preneur;
 }
 
 void Belotte::setAtout(Couleur atout) {
@@ -417,15 +417,16 @@ void Belotte::jeu() {
 		}
 		//On commence à jouer :
 		for (int k = 0; k < 8; k++) {
-			Pli * p = new p(&this);
+			Pli * p = new Pli(this);
 			int r = this->id_preneur;
 			for (int l =0; l < 4; l++){
+				Carte carte_jouee;
 				do {
 					s->envoyer_demande(3, r);
-					Carte carte_jouee = attendre_carte();
+					carte_jouee = attendre_carte();
 				} while (!this->verifCarte(carte_jouee));
 				joueurs[r].getMain()->retirerCarte(carte_jouee);
-				s->envoyer_main(joueurs[r].getMain());
+				s->envoyer_main(*(joueurs[r].getMain()));
 				p->ajouter_carte(carte_jouee);
 				if (carte_jouee == this->plusHaute(p->getVectCarte())) {
 					this->id_preneur = r;
