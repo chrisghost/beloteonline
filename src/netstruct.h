@@ -60,8 +60,8 @@ struct packet_serveur // Structure pour les transferts de données
 	enum Couleur couleur_att;	//5
 	bool valid;					//6
     int nb_cartes;				//7 - nombre de cartes dans le tableau
-    enum Valeur vals[5];		//7
-    enum Couleur couls[5];		//7
+    enum Valeur vals[8];		//7
+    enum Couleur couls[8];		//7
     int points[2];				//8
 
 };
@@ -75,7 +75,7 @@ sf::Packet& operator <<(sf::Packet& Packet, const packet_serveur& pl)
 sf::Packet& operator >>(sf::Packet& Packet, packet_serveur& pl)
 {
     Packet >> pl.id >> pl.log >> pl.id_j >> pl.message >> pl.val >> pl.couleur >> pl.demande >> pl.couleur_att
-		>> pl.valid >> pl.nb_cartes >> pl.vals[5] >> pl.couls[5] >> pl.points[2];
+		>> pl.valid >> pl.nb_cartes >> pl.vals[8] >> pl.couls[8] >> pl.points[2];
     return Packet;
 }
 
