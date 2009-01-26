@@ -12,14 +12,16 @@
 /***********************************
  * Constructeur
  ***********************************/
-Belotte::Belotte(Couleur atout, int pointsMax, int preneur)
+Belotte::Belotte(int pointsMax, int preneur)
 	:equipes(), joueurs(){
 	this->s = new Server(1234, this);
 	this->rep = 0;
-	this->atout = atout;
+	this->atout = carreau;
+	this->atout_defini = false;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
 	this->pliEnCours = 0;
+	this->id_preneur = -1;
 }
 
 /***********************************
@@ -227,21 +229,25 @@ void Belotte::jeu() {
 		m1.ajouterCarte(vectCartes[pos]);
 		vectCartes.erase(vectCartes.begin()+pos);
 	}
+	s->envoyer_main(m1, 0);
 	for (i = 0; i < 5; i++) {
 		pos = rand() % vectCartes.size();
 		m2.ajouterCarte(vectCartes[pos]);
 		vectCartes.erase(vectCartes.begin()+pos);
 	}
+	s->envoyer_main(m2, 1);
 	for (i = 0; i < 5; i++) {
 		pos = rand() % vectCartes.size();
 		m3.ajouterCarte(vectCartes[pos]);
 		vectCartes.erase(vectCartes.begin()+pos);
 	}
+	s->envoyer_main(m3, 2);
 	for (i = 0; i < 5; i++) {
 		pos = rand() % vectCartes.size();
 		m4.ajouterCarte(vectCartes[pos]);
 		vectCartes.erase(vectCartes.begin()+pos);
 	}
+	s->envoyer_main(m4, 3);
 	pos = rand() % vectCartes.size();
 	Carte car = vectCartes[pos];
 	vectCartes.erase(vectCartes.begin()+pos);
@@ -252,21 +258,171 @@ void Belotte::jeu() {
 	while (!prise && num!= 4) {
 		bool b = s->proposerCarte(car, num);
 		prise = this->attendre_reponse();
+		if (prise) {
+			this->id_preneur = num;
+			this->setAtout(couleur_atout);
+			this->atout_defini = true;
+		}
 		num++;
 	}
 	if (!prise) {
 		num = 0;
+		Couleur couleur_atout;
 		while (!prise && num!=4) {
 			bool b = s->proposerCarte(car, num);
 			prise = this->attendre_reponse();
 			if (prise) {
-				coul = s->demander_couleur(num);
-
+				bool bo = s->demander_couleur(num);
+				couleur_atout = this->attendre_couleur();
+				this->id_preneur = num;
 			}
 			num++;
 		}
+		if (prise) {
+			this->setAtout(couleur_atout);
+			this->atout_defini = true;
+			s->envoyer_atout_tous(this->atout);
+		}
+	}
+	else {
+		this->atout = car.getCouleur();
+		this->atout_defini = true;
+		s->envoyer_atout_tous(this->atout);
 	}
 
+	if (this->atout_defini){ //une fois l'atout défini, on fini de distribuer :
+		switch (this->id_preneur) {
+			case 1 :
+				m1.ajouterCarte(car);
+				for (i = 0; i < 2; i++) {
+					pos = rand() % vectCartes.size();
+					m1.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[0].setMain(&m1);
+				s->envoyer_main(m1, 0);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m2.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[1].setMain(&m2);
+				s->envoyer_main(m2, 1);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m3.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[2].setMain(&m3);
+				s->envoyer_main(m3, 2);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m4.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[3].setMain(&m4);
+				s->envoyer_main(m4, 3);
+				break;
+			case 2:
+				m2.ajouterCarte(car);
+				for (i = 0; i < 2; i++) {
+					pos = rand() % vectCartes.size();
+					m2.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[1].setMain(&m2);
+				s->envoyer_main(m2, 1);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m2.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[0].setMain(&m1);
+				s->envoyer_main(m1, 0);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m3.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[2].setMain(&m3);
+				s->envoyer_main(m3, 2);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m4.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[3].setMain(&m4);
+				s->envoyer_main(m4, 3);
+				break;
+			case 3 :
+				m3.ajouterCarte(car);
+				for (i = 0; i < 2; i++) {
+					pos = rand() % vectCartes.size();
+					m3.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[2].setMain(&m3);
+				s->envoyer_main(m3, 2);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m2.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[1].setMain(&m2);
+				s->envoyer_main(m2, 1);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m1.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[0].setMain(&m1);
+				s->envoyer_main(m1, 0);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m4.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[3].setMain(&m4);
+				s->envoyer_main(m4, 3);
+				break;
+			case 4 :
+				m4.ajouterCarte(car);
+				for (i = 0; i < 2; i++) {
+					pos = rand() % vectCartes.size();
+					m4.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[3].setMain(&m4);
+				s->envoyer_main(m4, 3);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m2.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[1].setMain(&m2);
+				s->envoyer_main(m2, 1);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m3.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[2].setMain(&m3);
+				s->envoyer_main(m3, 2);
+				for (i = 0; i < 3; i++) {
+					pos = rand() % vectCartes.size();
+					m1.ajouterCarte(vectCartes[pos]);
+					vectCartes.erase(vectCartes.begin()+pos);
+				}
+				joueurs[0].setMain(&m1);
+				s->envoyer_main(m1, 0);
+				break;
+		}
+		//On commence à jouer :
+		for (int k = 0; k < 8; k++) {
+
+		}
+
+	}
 }
 
 void wait (int secondes)
