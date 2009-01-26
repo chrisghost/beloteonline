@@ -12,6 +12,10 @@ Pli::Pli(Belotte * b){
 	this->b = b;
 }
 
+std::vector<Carte> Pli::getVectCarte() {
+	return this->carteDuPli;
+}
+
 bool Pli::estVide(){
 	return carteDuPli.size()==0;
 }

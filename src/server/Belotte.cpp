@@ -12,16 +12,16 @@
 /***********************************
  * Constructeur
  ***********************************/
-Belotte::Belotte(int pointsMax, int preneur)
+Belotte::Belotte(int pointsMax)
 	:equipes(), joueurs(){
 	this->s = new Server(1234, this);
 	this->rep = 0;
 	this->atout = carreau;
 	this->atout_defini = false;
 	this->pointsMax = pointsMax;
-	this->preneur = preneur;
 	this->pliEnCours = 0;
 	this->id_preneur = -1;
+
 }
 
 /***********************************
@@ -285,8 +285,6 @@ void Belotte::jeu() {
 		}
 	}
 	else {
-		this->atout = car.getCouleur();
-		this->atout_defini = true;
 		s->envoyer_atout_tous(this->atout);
 	}
 
@@ -419,7 +417,22 @@ void Belotte::jeu() {
 		}
 		//On commence à jouer :
 		for (int k = 0; k < 8; k++) {
-			;
+			Pli * p = new p(&this);
+			int r = this->id_preneur;
+			for (int l =0; l < 4; l++){
+				do {
+					s->envoyer_demande(3, r);
+					Carte carte_jouee = attendre_carte();
+				} while (!this->verifCarte(carte_jouee));
+				joueurs[r].getMain()->retirerCarte(carte_jouee);
+				s->envoyer_main(joueurs[r].getMain());
+				p->ajouter_carte(carte_jouee);
+				if (carte_jouee == this->plusHaute(p->getVectCarte())) {
+					this->id_preneur = r;
+				}
+				r = (r++) % 4;
+			}
+			plis.push_back(p);
 		}
 
 	}
