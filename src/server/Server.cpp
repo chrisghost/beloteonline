@@ -74,7 +74,8 @@ Server::Server(unsigned short Port)
 								<< " de " << st.couleur << std::endl;
 							break;
 						case 3 ://Reponse
-							std::cout << "Le client " << st.log << "("<< st.id_j << ") répond "<< st.reponse << std::end;
+							std::cout << "Le client " << st.log << "("<< st.id_j << ") répond "<< st.reponse << std::endl;
+
 							break;
 						case 4 ://Couleur attout
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la couleur "<<

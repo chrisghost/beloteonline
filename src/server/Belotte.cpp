@@ -11,8 +11,9 @@
 /***********************************
  * Constructeur
  ***********************************/
-Belotte::Belotte(Couleur atout, int pointsMax, int preneur)
+Belotte::Belotte(Couleur atout, int pointsMax, int preneur, Server * s)
 	:equipes(), joueurs() {
+	this->s = s;
 	this->atout = atout;
 	this->pointsMax = pointsMax;
 	this->preneur = preneur;
@@ -31,7 +32,7 @@ void Belotte::setAtout(Couleur atout) {
 }
 
 void Belotte::ajouterJoueur(Joueur j) {
-
+	joueurs.push_back(j);
 }
 
 /***********************************
@@ -198,7 +199,7 @@ void Belotte::jeu() {
 	while (coul <= 4) { // coul <= carreau
 		while (val <= 14) {// val <= 14
 			Carte c = Carte(Valeur(val), Couleur(coul), this);
-			vectCartes.push_back(c); //il faudrait randomiser le vecteur mais je sais pas encore comment
+			vectCartes.push_back(c); //On créé le jeu de carte
 			if (val < 14)
 				val=val+1;
 			else
@@ -214,6 +215,8 @@ void Belotte::jeu() {
 	MainJoueur m2(&joueurs[1]);
 	MainJoueur m3(&joueurs[2]);
 	MainJoueur m4(&joueurs[3]);
+
+	//On distribue les cartes aléatoirement :
 	int i;
 	unsigned int pos;
 	srand ( time(NULL) );
@@ -241,5 +244,16 @@ void Belotte::jeu() {
 	Carte car = vectCartes[pos];
 	vectCartes.erase(vectCartes.begin()+pos);
 
-	//Comment montrer cette carte à tous les joueurs ??
+	//On montre la carte à tous les joueurs et ils décident s'ils la choisissent :
+
+}
+
+bool Belotte::s_attendreReponse() {
+	while (this->reponse == 0) {
+		;
+	}
+}
+
+void Belotte::reponse(int rep) {
+	this->reponse = rep;
 }
