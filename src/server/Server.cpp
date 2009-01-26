@@ -6,6 +6,10 @@
 Server::Server(unsigned short Port, Belotte * b)
 {
 	this->b = b;
+
+	for (int i=0; i<4;i++)
+		login[i] = "";
+
 	// Create a socket for listening to incoming connections
 	if (!sServer.Listen(Port))
 		return;
@@ -129,17 +133,21 @@ void Server::demander_couleur(int id){
 
 }
 
-void Server::envoyer_liste_joueurs(int id_client, int id_j, string l){
+void Server::envoyer_liste_joueurs(){
 
-	packet_serveur pk = { 4, l , id_j , "", sept , carreau, 2, carreau, false ,0,
-			{sept,sept,sept,sept,sept,sept,sept,sept},
-			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
-    sf::Packet Packet;
+	for(int i=0; i<4;i++){
+		for(int j=0; j<4;j++){
 
-    Packet << pk;
+			packet_serveur pk = { 1, login[j] , j , "", sept , carreau, 2, carreau, false ,0,
+					{sept,sept,sept,sept,sept,sept,sept,sept},
+					{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+			sf::Packet Packet;
 
-	Client[id].Send(Packet);
+			Packet << pk;
 
+			Client[i].Send(Packet);
+		}
+	}
 }
 
 void Server::envoyer_main(MainJoueur m, int idj){
@@ -169,13 +177,67 @@ void Server::envoyer_main(MainJoueur m, int idj){
 
 void Server::envoyer_message(string mess, int idj){
 
+	packet_serveur pk = { 2, mess , id , "", sept , carreau, 2, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[idj].Send(Packet);
 }
-void Server::envoyer_demande(int demande, int idj);
+void Server::envoyer_demande(int demande, int idj){
 
-void Server::envoyer_atout_tous(Couleur atout);
-void Server::envoyer_atout(Couleur atout, int idj);
+	packet_serveur pk = { 4, "" , id , "", sept , carreau, demande, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
 
-void Server::envoyer_validation(bool Valid, int idj);
+    Packet << pk;
 
-void Server::envoyer_points_tous(int points[2]);
-void Server::envoyer_points(int points[2], int idj);
+	Client[idj].Send(Packet);
+}
+
+void Server::envoyer_atout_tous(Couleur atout){
+	for (int i=0; i< 4; i++)
+		this->envoyer_atout(atout,i);
+}
+void Server::envoyer_atout(Couleur atout, int idj){
+
+	packet_serveur pk = { 5, "" , id , "", sept , carreau, 2, atout, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[idj].Send(Packet);
+}
+
+void Server::envoyer_validation(bool Valid, int idj){
+
+	packet_serveur pk = { 6, "" , id , "", sept , carreau, 2, carreau, Valid ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[idj].Send(Packet);
+}
+
+void Server::envoyer_points_tous(int points[2]){
+	for(int i=0; i<4; i++)
+		envoyer_points(points,i);
+}
+void Server::envoyer_points(int points[2], int idj){
+
+	packet_serveur pk = { 8, "" , id , "", sept , carreau, 2, carreau, false ,0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},points};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+	Client[idj].Send(Packet);
+}
