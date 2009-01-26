@@ -256,11 +256,11 @@ void Belotte::jeu() {
 	bool prise = false;
 	int num = 0;
 	while (!prise && num!= 4) {
-		bool b = s->proposerCarte(car, num);
+		s->proposerCarte(car, num);
 		prise = this->attendre_reponse();
 		if (prise) {
 			this->id_preneur = num;
-			this->setAtout(couleur_atout);
+			this->setAtout(car.getCouleur());
 			this->atout_defini = true;
 		}
 		num++;
@@ -269,10 +269,10 @@ void Belotte::jeu() {
 		num = 0;
 		Couleur couleur_atout;
 		while (!prise && num!=4) {
-			bool b = s->proposerCarte(car, num);
+			s->proposerCarte(car, num);
 			prise = this->attendre_reponse();
 			if (prise) {
-				bool bo = s->demander_couleur(num);
+				s->demander_couleur(num);
 				couleur_atout = this->attendre_couleur();
 				this->id_preneur = num;
 			}
@@ -419,7 +419,7 @@ void Belotte::jeu() {
 		}
 		//On commence à jouer :
 		for (int k = 0; k < 8; k++) {
-
+			;
 		}
 
 	}
@@ -457,7 +457,7 @@ Carte Belotte::attendre_carte() {
 			exit(0);
 		}
 	}
-	return (this->c);
+	return *(this->c);
 }
 
 Couleur Belotte::attendre_couleur() {
@@ -470,7 +470,7 @@ Couleur Belotte::attendre_couleur() {
 			exit(0);
 		}
 	}
-	return (this->coul);
+	return *(this->coul);
 }
 
 void Belotte::retour_reponse(bool rep) {
@@ -478,9 +478,9 @@ void Belotte::retour_reponse(bool rep) {
 }
 
 void Belotte::retour_carte(Carte car) {
-	this->c = car;
+	this->c = &car;
 }
 
 void Belotte::retour_couleur(Couleur coul) {
-	this->coul = coul;
+	this->coul = &coul;
 }
