@@ -56,7 +56,7 @@ struct packet_serveur // Structure pour les transferts de données
 	string message;				//2
 	enum Valeur val;			//3
 	enum Couleur couleur;		//3
-	int demande;				//4 - (1- prendre carte; 2- attout?; 3- joueur carte)
+	int demande;				//4 - (1- prendre carte; 2- choisir attout; 3- joueur carte)
 	enum Couleur couleur_att;	//5
 	bool valid;					//6
     int nb_cartes;				//7 - nombre de cartes dans le tableau
