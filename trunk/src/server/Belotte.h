@@ -16,8 +16,10 @@ class Carte;
 class Pli;
 #include "Pli.h"
 //#include "deftype.h"
+#include "Server.h"
 #include <stdlib.h>
 #include <vector>
+#include <string.h>
 #include <iostream>
 
 
@@ -33,10 +35,14 @@ class Belotte {
 		int preneur;
 		int pliEnCours;
 
+		//attributs pour les échanges avec le serveur
+		Server * s;
+		int reponse;
+
 	public:
 
 		//constructeur
-		Belotte(Couleur atout, int pointsMax, int preneur);
+		Belotte(Couleur atout, int pointsMax, int preneur, Server * s);
 
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
@@ -53,6 +59,8 @@ class Belotte {
 												// et vide le vecteur de plis pour commencer une nouvelle mène
 		void jeu(); 							//methode qui gere tout le déroulement du jeu (distribution des cartes,
 												//choix de l'atout par les joueurs, passage d'une mène à une autre, etc ...)
+		bool s_attendreReponse();				//attend la réponse à une demande au client
+		void reponse(int rep);					//méthode appelée par server pour envoyer la réponse
 };
 
 #endif /*BELOTTE_H_*/
