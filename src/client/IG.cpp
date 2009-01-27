@@ -60,11 +60,31 @@ void IG::afficher_pli(vector<Carte> pli){
 
 
 Couleur IG::demander_couleur_atout() {
-
-	int coul;
-	cout << "Veuillez choisir une couleur: " << endl;
-	cin >> coul;
-	return ((Couleur)coul);
+	bool ok = false;
+	Couleur c;
+	do {
+		int coul;
+		cout << "Veuillez choisir une couleur: " << endl;
+		cin >> coul;
+		c = Couleur (coul);
+		switch (c) {
+		case 1 :
+			ok = true;
+			break;
+		case 2 :
+			ok = true;
+			break;
+		case 3 :
+			ok = true;
+			break;
+		case 4 :
+			ok =true;
+			break;
+		default :
+			break;
+		}
+	} while (!ok);
+	return (c);
 }
 
 
@@ -82,5 +102,5 @@ void IG::afficher_joueur(Joueur j) {
 	cout << "Le joueur ";
 	cout << j.getLogin();
 	cout << "a l'id ";
-	cout << j.getId();
+	cout << j.getId() << endl;
 }
