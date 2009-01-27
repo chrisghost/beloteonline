@@ -3,9 +3,11 @@
 
 using namespace std;
 #include <string>
+#include <iostream>
 
 #include "../server/carte.h"
 #include "../server/Joueur.h"
+#include "../server/deftype.h"
 
 class IG
 {
