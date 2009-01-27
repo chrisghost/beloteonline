@@ -15,6 +15,8 @@ public:
 	virtual ~Client();
 	bool Connexion();
 	bool envoyer_carte(Carte c);
+	bool envoyer_couleur(Couleur coul);
+	bool envoyer_reponse(bool rep);
 private:
 	int id_j;
 	sf::SocketTCP sClient;
