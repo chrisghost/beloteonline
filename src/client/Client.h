@@ -5,6 +5,8 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 #include "../server/carte.h"
+#include "../server/Belotte.h"
+#include "IG.h"
 //#include "../server/deftype.h"
 
 using namespace std;

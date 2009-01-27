@@ -18,13 +18,15 @@ int IG::demande_rep(string message){
 
 Carte IG::demande_Carte(vector<Carte> main){
 	//affiche les 8 Cartes de la main
-	int n=1;
 	cout << "Affichage de la main :" << endl;
 		for (int i=0;i < main.size();i++){
-			cout << "Carte n°" << n << endl;
+			cout << "Carte n°" << i << endl;
 			afficher_uneCarte(main[i]);
-			n=n+1;
 		}
+	cout << "Entrez le numéro de la carte :";
+	int i = 0;
+	cin >> i;
+	return main[i];
 }
 
 void IG::afficher_Carte(Carte c){
@@ -70,7 +72,7 @@ Couleur IG::demander_couleur_atout() {
 	Couleur c;
 	do {
 		int coul;
-		cout << "Veuillez choisir une couleur: " << endl;
+		cout << "Veuillez choisir une couleur: (pique=1,coeur=2,trefle=3,carreau=4)" << endl;
 		cin >> coul;
 		c = Couleur (coul);
 		switch (c) {
