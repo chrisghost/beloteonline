@@ -9,6 +9,12 @@ IG::~IG() {
 
 }
 
+int IG::demande_rep(string message){
+	this->afficher_message(message);
+	int i;
+	cin >> i;
+	return i;
+}
 
 Carte IG::demande_Carte(vector<Carte> main){
 	//affiche les 8 Cartes de la main

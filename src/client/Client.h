@@ -22,6 +22,13 @@ private:
 	sf::SocketTCP sClient;
 	unsigned short Port;
 	sf::IPAddress ServerAddress;
+
+	IG * ig;
+
+	string login[4];
+	Couleur atout;
+	vector<Carte> main;
+	int points[2];
 };
 
 #endif /*CLIENT_H_*/

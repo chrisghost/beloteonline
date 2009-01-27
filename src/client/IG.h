@@ -3,18 +3,17 @@
 
 using namespace std;
 #include <string>
-#include <iostream>
 
 #include "../server/carte.h"
 #include "../server/Joueur.h"
-#include "../server/deftype.h"
 
 class IG
 {
 public:
 	IG();
 	virtual ~IG();
-	Carte demande_Carte(vector<Carte> main);
+	int demande_rep(string message);
+	Carte demande_Carte(vector<Carte>);
 	void afficher_Carte(Carte c);
 	void afficher_message(string mess);
 	void afficher_liste_joueurs(vector<Joueur> joueur);
