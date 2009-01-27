@@ -54,9 +54,9 @@ Client::Client(unsigned short Port)
 
     				break;
     			case 4 :{//demande
-						if(st.demande == 2)
+						if(st.demande == 2) // Choisir atout
 							Couleur c = ig->demander_couleur_atout();
-						else if(st.demande == 3){
+						else if(st.demande == 3){ // Jouer une carte
 							Carte c = ig->demande_Carte(main);}
     				break;}
     			case 5 ://atout
@@ -108,6 +108,25 @@ bool Client::envoyer_carte(Carte c){// ID = 2
 
     return (sClient.Send(Packet) == sf::Socket::Done);
 }
+
+bool Client::envoyer_reponse(bool rep){
+	packet_client pk = {3 , "" , id_j , zero , rien , rep , rien};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+    return (sClient.Send(Packet) == sf::Socket::Done);
+}
+
+bool Client::envoyer_couleur(Couleur coul){
+	packet_client pk = {4 , "" , id_j , zero , rien , rep , coul};
+    sf::Packet Packet;
+
+    Packet << pk;
+
+    return (sClient.Send(Packet) == sf::Socket::Done);
+}
+
 
 Client::~Client()
 {
