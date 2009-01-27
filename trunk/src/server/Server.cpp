@@ -1,5 +1,5 @@
 #include "Server.h"
-#include "../netstruct.h"
+#include "netstruct.h"
 
 ////////////////////////////////////////////////////////////
 
@@ -51,10 +51,10 @@ Server::Server(unsigned short Port, Belotte * b)
 				clients[nb_cl_connected] = Address;
 
 				if(nb_cl_connected<2){
-					Joueur j(nb_cl_connected, Address, e1, "");
+					Joueur j(nb_cl_connected, e1, "");
 					b->ajouterJoueur(j);}
 				else{
-					Joueur j(nb_cl_connected, Address, e2, "");
+					Joueur j(nb_cl_connected, e2, "");
 					b->ajouterJoueur(j);}
 
 				packet_serveur pk = {1 , "" , nb_cl_connected , "", sept, carreau, 0, carreau, false, 0,

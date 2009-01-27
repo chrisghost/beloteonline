@@ -1,10 +1,11 @@
 #include "Client.h"
-#include "../netstruct.h"
+#include "netstruct.h"
+#include "stdlib.h"
 ////////////////////////////////////////////////////////////
 
 Client::Client(unsigned short Port)
 {
-	ig = new IG();
+	this->ig = new IG();
 	points[0] = 0;
 	points[1] = 1;
 	this->Port = Port;
@@ -47,12 +48,12 @@ Client::Client(unsigned short Port)
     			case 2 ://message
 						ig->afficher_message(st.message);
     				break;
-    			case 3 ://carte
-						Carte c(st.val,st.couleur,null);
+    			case 3 : {//carte
+						Carte c(st.val,st.couleur,NULL);
 						ig->afficher_uneCarte(c);
 						int i = ig->demande_rep("Prendre la carte?(1 = oui / 2 = non)");
 
-    				break;
+    				break;}
     			case 4 :{//demande
 						if(st.demande == 2) // Choisir atout
 							Couleur c = ig->demander_couleur_atout();
@@ -68,15 +69,15 @@ Client::Client(unsigned short Port)
 						else
 							ig->afficher_message("erreur");
     				break;
-    			case 7 ://cartes
+    			case 7 :{//cartes
 					unsigned int j = 0;
 					for(j = 0; j < st.nb_cartes; j++){
-						Carte cc(st.vals[j], st.couls[j], null);
+						Carte cc(st.vals[j], st.couls[j], NULL);
 						this->main[j] = cc;}
 					while (j<8){
-						Carte cc(zero, rien, null);
+						Carte cc(zero, rien, NULL);
 						this->main[j] = cc;}
-    				break;
+    				break;}
     			case 8 ://points
 						this->points[0] = st.points[0];
 						this->points[1] = st.points[1];
@@ -119,7 +120,7 @@ bool Client::envoyer_reponse(bool rep){
 }
 
 bool Client::envoyer_couleur(Couleur coul){
-	packet_client pk = {4 , "" , id_j , zero , rien , rep , coul};
+	packet_client pk = {4 , "" , id_j , zero , rien , false , coul};
     sf::Packet Packet;
 
     Packet << pk;
