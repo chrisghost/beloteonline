@@ -430,6 +430,7 @@ do {
 			for (int l =0; l < 4; l++){
 				Carte * carte_jouee;
 				do {
+					s->envoyer_main(*joueurs[r].getMain(), r);
 					s->envoyer_demande(3, r);
 					*carte_jouee = attendre_carte();
 				} while (!this->verifCarte(*carte_jouee));
