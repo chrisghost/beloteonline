@@ -12,7 +12,7 @@ class IG
 public:
 	IG();
 	virtual ~IG();
-	Carte demande_Carte(vector<Carte>);
+	Carte demande_Carte(vector<Carte> main);
 	void afficher_Carte(Carte c);
 	void afficher_message(string mess);
 	void afficher_liste_joueurs(vector<Joueur> joueur);
