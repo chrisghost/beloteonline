@@ -139,7 +139,7 @@ void Belotte::finMene() {
 			ptsE1 = ptsE1 + i->calcul_points();
 		else {
 			if(e2undef){
-				Equipe * E2 = Belotte::unJoueur(i->gagnant()).getEquipe();
+				E2 = Belotte::unJoueur(i->gagnant()).getEquipe();
 				e2undef = false;}
 			ptsE2 = ptsE2 + i->calcul_points();
 		}
