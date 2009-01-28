@@ -53,11 +53,13 @@ int Equipe::partenaire(int id){
 		return NULL;
 }
 
-Joueur Equipe::unJoueur(int id){
+Joueur * Equipe::unJoueur(int id){
 	if (joueurs[1].getId() == id)
-		return joueurs[1];
+		return &joueurs[1];
 	else if (joueurs[2].getId() == id)
-		return joueurs[2];
+		return &joueurs[2];
+	else
+		return NULL;
 
 }
 
