@@ -1,6 +1,12 @@
 #include "Client.h"
-#include "netstruct.h"
 #include "stdlib.h"
+
+#ifndef NETS
+#include "../netstruct_server.h"
+#endif
+#ifndef NET
+#include "../netstruct_client.h"
+#endif
 ////////////////////////////////////////////////////////////
 
 Client::Client(unsigned short Port)
@@ -12,7 +18,7 @@ Client::Client(unsigned short Port)
     do
     {
         cout << "Type address or name of the server to connect to : ";
-        cin  >> ServerAddress;
+        ServerAddress = "localhost";
     }
     while (!ServerAddress.IsValid());
 
@@ -28,23 +34,30 @@ Client::Client(unsigned short Port)
     		packet_serveur pk;
     		re >> pk;
 			this->id_j = pk.id_j;
+    		cout << "Packet ID recu! : " << pk.id_j << " = " << this->id_j << endl;
     	}
 
-    	if(!this->Connexion())
-    		std::cout << "Erreur à la connexion" << endl;
+    	if(this->Connexion())
+    		cout << "Packet envoyé!" << endl;
     	bool continuer = true;
 
     	while (continuer){
 
+    		//cout << "Boucle reception" << endl;
+
     		sf::Packet packet;
     		if (sClient.Receive(packet) == sf::Socket::Done){
+
+    			cout << "Packet recu!" << endl;
+
     			packet_serveur st;
     			packet >> st;
 
     			switch (st.id){
-    			case 1 ://Joueur
+    			case 1 :{//Joueur
     					login[st.id_j] = st.log;
-    				break;
+    					cout << "Recu : Id joueur = " << st.id_j << " de login : " << st.log;
+    				break;}
     			case 2 ://message
 						ig->afficher_message(st.message);
     				break;
@@ -55,6 +68,7 @@ Client::Client(unsigned short Port)
 
     				break;}
     			case 4 :{//demande
+    				cout << "DEMANDE" << endl;
 						if(st.demande == 2) // Choisir atout
 							Couleur c = ig->demander_couleur_atout();
 						else if(st.demande == 3){ // Jouer une carte
@@ -83,7 +97,9 @@ Client::Client(unsigned short Port)
 						this->points[1] = st.points[1];
     				break;
     			}
-    		}
+    		}else{
+        		//cout << "Pas de packet" << endl;
+        	}
 
     	}
 }
@@ -91,15 +107,16 @@ Client::Client(unsigned short Port)
 bool Client::Connexion(){
         string login;
         cout << "Entrez le login : ";
-        cin >> login;
+        login = "a";
         cin.ignore(1000, '\n');
 
     	packet_client pk = {1 , login , this->id_j , sept, carreau , false , carreau};
 
         sf::Packet Packet;
 
-        Packet << pk;
-    return (sClient.Send(Packet) == sf::Socket::Done);
+		Packet << pk;
+	    return (sClient.Send(Packet) == sf::Socket::Done);
+
 }
 bool Client::envoyer_carte(Carte c){// ID = 2
 	packet_client pk = {2 , "" , id_j , c.getValeur() , c.getCouleur() , false , carreau};

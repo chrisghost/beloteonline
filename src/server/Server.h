@@ -7,6 +7,7 @@
 #include "carte.h"
 #include "Belotte.h"
 
+
 using namespace std;
 class Server
 {
@@ -35,6 +36,8 @@ private:
 	sf::IPAddress clients[4];
 	sf::SocketTCP Client[4];
 	int nb_cl_connected;
+
+	int nb_log;
 	string login[4];
 };
 

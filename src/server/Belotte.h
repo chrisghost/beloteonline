@@ -24,13 +24,14 @@ class Server;
 #include <iostream>
 
 
+
 class Belotte {
 
 	private:
 		//attributs
 		std::vector <Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
-		std::vector <Equipe> equipes;	// Vecteur contenant les 2 équipes
-		std::vector <Joueur> joueurs;	// Vecteur contenant les joueurs
+		std::vector <Equipe*> equipes;	// Vecteur contenant les 2 équipes
+		std::vector <Joueur*> joueurs;	// Vecteur contenant les joueurs
 		Couleur atout;					// Couleur de l'atout courant
 		bool atout_defini;
 		int pointsMax;					// Nombre de points nécessaires pour gagner le jeu
@@ -51,13 +52,13 @@ class Belotte {
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
 		void setPreneur(int id);
-		void ajouterJoueur(Joueur j);
+		void ajouterJoueur(Joueur * j);
 
 		//methodes
 		bool estAtout(Carte * carte); 			//retourne vrai si la carte  est un atout
 		bool verifCarte(Carte carte); 			//retourne vrai si la carte peu etre jouee a ce moment de la partie
 		Carte plusHaute(std::vector<Carte> cartes);	//retourne la carte ayant la plus haute valeur du vecteur cartes
-		void ajouterEquipe(Equipe equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
+		void ajouterEquipe(Equipe * equipe);		//ajoute une equipe a la liste d'equipe (2 maximum)
 		Joueur unJoueur(int id);				//retourne le joueur de l'id si il existe, NULL sinon
 		void finMene();							//compte les points, les ajoute à l'équipe gagnante de la mène
 												// et vide le vecteur de plis pour commencer une nouvelle mène
