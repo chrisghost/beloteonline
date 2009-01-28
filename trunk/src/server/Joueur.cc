@@ -12,10 +12,10 @@
 /***********************************
  * Constructeur
  ***********************************/
-Joueur::Joueur(int id, Equipe E, string login){
+Joueur::Joueur(int id, Equipe * E, string login){
 	main = new MainJoueur(this);
 	this->id = id;
-	this->equipe = &E;
+	this->equipe = E;
 	this->login = login;
 }
 
@@ -32,8 +32,8 @@ MainJoueur * Joueur::getMain() {
 	return this->main;
 }
 
-Equipe Joueur::getEquipe() {
-	return *equipe;
+Equipe * Joueur::getEquipe() {
+	return equipe;
 }
 
 void Joueur::setMain(MainJoueur * m) {

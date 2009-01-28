@@ -1,5 +1,11 @@
 #include "Server.h"
-#include "netstruct.h"
+
+#ifndef NETS
+#include "../netstruct_server.h"
+#endif
+#ifndef NET
+#include "../netstruct_client.h"
+#endif
 
 ////////////////////////////////////////////////////////////
 
@@ -16,6 +22,7 @@ Server::Server(unsigned short Port, Belotte * b)
 	std::cout << "Listening to port " << Port << ", waiting for connections..." << std::endl;
 
 	nb_cl_connected = 0;
+	nb_log = 0;
 
 	// Create a selector for handling several sockets (the listener + the socket associated to each client)
 	sf::SelectorTCP Selector;
@@ -24,15 +31,29 @@ Server::Server(unsigned short Port, Belotte * b)
 	Selector.Add(sServer);
 
 
-	Equipe e1(1, false);
-	Equipe e2(2, false);
+	Equipe * e1 = new Equipe(1, false);
+	Equipe * e2 = new Equipe(2, false);
+
+/*	Client[0] = sf::SocketTCP();
+	Client[1] = sf::SocketTCP();
+	Client[2] = sf::SocketTCP();
+	Client[3] = sf::SocketTCP();*/
 
 
 	// Loop while... we close the program :)
 	while (true)
 	{
+		cout << "Boucle principale starts " << endl;
+
+		if(nb_cl_connected == 4 && this->nb_log == 4){
+			cout << "Lancement de la partie ..." << endl;
+			b->jeu();}
+
 		// Get the sockets ready for reading
 		unsigned int NbSockets = Selector.Wait();
+
+		cout << "Boucle! de " << NbSockets  << endl;
+
 
 		// We can read from each returned socket
 		for (unsigned int i = 0; i < NbSockets; ++i)
@@ -40,21 +61,27 @@ Server::Server(unsigned short Port, Belotte * b)
 			// Get the current socket
 			sf::SocketTCP Socket = Selector.GetSocketReady(i);
 
+			cout << "Packet recu!0" << endl;
+
 			if (Socket == sServer)
 			{
 				// If the listening socket is ready, it means that we can accept a new connection
 				sf::IPAddress Address;
 
-				sServer.Accept(Client[nb_cl_connected], &Address);
+				sf::SocketTCP tmp;
+
+				sServer.Accept(tmp, &Address);
 				std::cout << "Client connected ! (" << Address << ")" << std::endl;
+
+				Client[nb_cl_connected] = tmp;
 
 				clients[nb_cl_connected] = Address;
 
 				if(nb_cl_connected<2){
-					Joueur j(nb_cl_connected, e1, "");
+					Joueur * j = new Joueur(nb_cl_connected, e1, "");
 					b->ajouterJoueur(j);}
 				else{
-					Joueur j(nb_cl_connected, e2, "");
+					Joueur * j = new Joueur(nb_cl_connected, e2, "");
 					b->ajouterJoueur(j);}
 
 				packet_serveur pk = {1 , "" , nb_cl_connected , "", sept, carreau, 0, carreau, false, 0,
@@ -64,18 +91,19 @@ Server::Server(unsigned short Port, Belotte * b)
 		        Packet << pk;
 				Client[nb_cl_connected].Send(Packet);
 
+				Selector.Add(Client[nb_cl_connected]);
+
 				nb_cl_connected++;
 
 
-				// Add it to the selector
-				Selector.Add(Client[nb_cl_connected]);
 			}
 			else
-			{
+			{cout << "Packet recu!1" << endl;
 				// Else, it is a client socket so we can read the data he sent
                 sf::Packet Packet;
                 if (Socket.Receive(Packet) == sf::Socket::Done)
                 {
+                	cout << "Packet recu!2" << endl;
 			        packet_client st;
                     Packet >> st;
 
@@ -83,6 +111,7 @@ Server::Server(unsigned short Port, Belotte * b)
 						case 1 ://Connexion
 							std::cout << "Le client " << st.id_j <<" s'apelle " << st.log << std::endl;
 							login[st.id_j] = st.log;
+							nb_log++;
 							break;
 						case 2 :{//Carte
 							std::cout << "Le client " << st.log << "("<< st.id_j << ") envoie la carte "<< st.val
@@ -105,12 +134,17 @@ Server::Server(unsigned short Port, Belotte * b)
                 }
                 else
                 {
+                	cout << "REMOVE!!!!" << endl;
                     // Error : we'd better remove the socket from the selector
                     Selector.Remove(Socket);
                 }
 			}
+			cout << "Boucle for finie" << endl;
 		}
+	cout << "Boucle principale finie" << endl;
 	}
+
+	cout << "Sortie inatendue!" << endl;
 }
 
 Server::~Server()
@@ -126,7 +160,20 @@ void Server::proposerCarte(Carte c, int id){
 
     Packet << pk;
 
-	Client[id].Send(Packet);
+    if (!Packet)
+    	cout << "Erreur packet " << endl;
+
+    if(Packet)
+    	cout << "Packet OK" << endl;
+
+    if(!Client[id].IsValid())
+    	cout << "Socket invalide" << endl;
+
+	if(this->Client[id].Send(Packet) == sf::Socket::Done)
+		cout << "Transfert OK" << endl;
+	else
+		cout << "Erreur de transfert" << endl;
+
 }
 
 void Server::demander_couleur(int id){
@@ -160,20 +207,34 @@ void Server::envoyer_liste_joueurs(){
 }
 
 void Server::envoyer_main(MainJoueur m, int idj){
+
+	cout << "Init vars" << endl;
+
 	vector<Carte> main = m.getCartes();
 	Couleur couls[8];
 	Valeur vals[8];
 	unsigned int i;
+	cout << "OK" << endl;
+
 	for(i = 0; i< main.size(); i++){
 		couls[i] = main[i].getCouleur();
 		vals[i] = main[i].getValeur();
+		cout << "Carte "<<i<<" transformée" << endl;
 	}
 	int nb_cartes = i+1;
 
+	cout << "Boucle " <<i << " < 8" << endl;
+
 	while(i<8){
+
 		couls[i] = main[i].getCouleur();
 		vals[i] = main[i].getValeur();
+
+		i++;
+		cout << "Carte complementaires num " << i <<endl;
 	}
+
+	cout << "Tableaux OK" << endl;
 
 	packet_serveur pk = { 7, "" , idj , "", sept , carreau, 0, carreau, false ,nb_cartes,
 			{* vals}, {* couls}, {0,0}};
@@ -181,7 +242,12 @@ void Server::envoyer_main(MainJoueur m, int idj){
 
     Packet << pk;
 
-	Client[idj].Send(Packet);
+    cout << "Packet prêt" << endl;
+
+	if(Client[idj].Send(Packet) == sf::Socket::Done)
+		cout << "Transfert OK" << endl;
+	else
+		cout << "Erreur de transfert" << endl;
 
 }
 
