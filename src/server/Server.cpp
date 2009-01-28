@@ -95,7 +95,6 @@ Server::Server(unsigned short Port, Belotte * b)
 
 				nb_cl_connected++;
 
-
 			}
 			else
 			{cout << "Packet recu!1" << endl;
@@ -236,15 +235,20 @@ void Server::envoyer_main(MainJoueur m, int idj){
 
 	cout << "Tableaux OK" << endl;
 
-	packet_serveur pk = { 7, "" , idj , "", sept , carreau, 0, carreau, false ,nb_cartes,
-			{* vals}, {* couls}, {0,0}};
+	//packet_serveur pk = { 7, "" , idj , "", sept , carreau, 0, carreau, false ,nb_cartes,
+	//		{* vals}, {* couls}, {0,0}};
+
+	packet_serveur pk = {1 , "" , 0 , "", sept, carreau, 0, carreau, false, 0,
+			{sept,sept,sept,sept,sept,sept,sept,sept},
+			{carreau,carreau,carreau,carreau,carreau,carreau,carreau,carreau},{0,0}};
+
     sf::Packet Packet;
 
     Packet << pk;
 
     cout << "Packet prêt" << endl;
 
-	if(Client[idj].Send(Packet) == sf::Socket::Done)
+	if(this->Client[idj].Send(Packet) == sf::Socket::Done)
 		cout << "Transfert OK" << endl;
 	else
 		cout << "Erreur de transfert" << endl;
