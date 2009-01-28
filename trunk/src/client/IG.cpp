@@ -9,7 +9,7 @@ IG::IG() {
     sf::RenderWindow App(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32), "SFML Graphics");
 	const sf::Input& Input = App.GetInput();
 
-    sf::Sprite fond;
+    /*sf::Sprite fond;
     sf::Image back;
     back.LoadFromFile("images/fond.png");
     fond.SetImage(back);
@@ -20,10 +20,10 @@ IG::IG() {
 	{
 
 
-	App.Draw(fond);
+	//App.Draw(fond);
 	App.Display();
 	}
-
+*/
 }
 
 
