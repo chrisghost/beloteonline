@@ -13,12 +13,12 @@ using namespace std;
 class Client
 {
 public:
-	Client(unsigned short Port);
-	virtual ~Client();
-	bool Connexion();
-	bool envoyer_carte(Carte c);
-	bool envoyer_couleur(Couleur coul);
-	bool envoyer_reponse(bool rep);
+	Client(unsigned short Port);		// Cnstructeur
+	virtual ~Client();					// Desctructeur
+	bool Connexion();					// Connexion du client au serveur
+	bool envoyer_carte(Carte c);		// Enviyer la carte c au serveur
+	bool envoyer_couleur(Couleur coul);	// Envoyer la couleur coul au serveur
+	bool envoyer_reponse(bool rep);		// Envoyer une réponse de type booléen au serveur
 private:
 	int id_j;
 	sf::SocketTCP sClient;

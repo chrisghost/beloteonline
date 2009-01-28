@@ -2,7 +2,6 @@
 #define NETSTRUCT_H
 /*
  * File:   netstruct.h
- * Author: chrissou
  *
  * Created on January 10, 2009, 3:26 PM
  */
@@ -12,12 +11,13 @@
 #include "server/carte.h"
 using namespace std;
 
-/* 1. Connexion
+/* Valeurs du champ id :
+ * 1. Connexion
    2. Carte
    3. Reponse
    4. Couleur attout */
 
-struct packet_client // Structure pour les transferts de données
+struct packet_client // Structure pour les transferts de données depuis le client vers le serveur
 {
 	int id;
 	string log;					//1
@@ -28,18 +28,19 @@ struct packet_client // Structure pour les transferts de données
 	enum Couleur couleur_att;	//4
 };
 
-sf::Packet& operator <<(sf::Packet& Packet, const packet_client& pl)
+sf::Packet& operator <<(sf::Packet& Packet, const packet_client& pl) // Pour entrer la structure dans le packet
 {
     return Packet << pl.id << pl.log << pl.id_j << pl.val << pl.couleur << pl.reponse << pl.couleur_att;
 }
 
-sf::Packet& operator >>(sf::Packet& Packet, packet_client& pl)
+sf::Packet& operator >>(sf::Packet& Packet, packet_client& pl) // Pour extraire la structure du packet
 {
     Packet >> pl.id >> pl.log >> pl.id_j >> pl.val >> pl.couleur >> pl.reponse >> pl.couleur_att;
     return Packet;
 }
 
-/* 1. Joueur
+/* Valeurs du champ id :
+ * 1. Joueur
    2. Message
    3. Carte
    4. Demande
@@ -48,7 +49,7 @@ sf::Packet& operator >>(sf::Packet& Packet, packet_client& pl)
    7. Cartes
    8. Points */
 
-struct packet_serveur // Structure pour les transferts de données
+struct packet_serveur // Structure pour les transferts de données depuis le serveur vers le client
 {
 	int id;
 	string log;					//1
@@ -66,13 +67,13 @@ struct packet_serveur // Structure pour les transferts de données
 
 };
 
-sf::Packet& operator <<(sf::Packet& Packet, const packet_serveur& pl)
+sf::Packet& operator <<(sf::Packet& Packet, const packet_serveur& pl) // Pour entrer la structure dans le packet
 {
     return Packet << pl.id << pl.log << pl.id_j << pl.message << pl.val << pl.couleur << pl.demande << pl.couleur_att
 		<< pl.valid << pl.nb_cartes << pl.vals << pl.couls << pl.points;
 }
 
-sf::Packet& operator >>(sf::Packet& Packet, packet_serveur& pl)
+sf::Packet& operator >>(sf::Packet& Packet, packet_serveur& pl) // Pour extraire la structure du packet
 {
     Packet >> pl.id >> pl.log >> pl.id_j >> pl.message >> pl.val >> pl.couleur >> pl.demande >> pl.couleur_att
 		>> pl.valid >> pl.nb_cartes >> pl.vals[8] >> pl.couls[8] >> pl.points[2];

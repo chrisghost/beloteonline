@@ -29,12 +29,12 @@ class Belotte {
 	private:
 		//attributs
 		std::vector <Pli> plis; // pour conserver les points de la mène et pouvoir les ajouter à l'équipe a la fin de la mène
-		std::vector <Equipe> equipes;
-		std::vector <Joueur> joueurs;
-		Couleur atout;
+		std::vector <Equipe> equipes;	// Vecteur contenant les 2 équipes
+		std::vector <Joueur> joueurs;	// Vecteur contenant les joueurs
+		Couleur atout;					// Couleur de l'atout courant
 		bool atout_defini;
-		int pointsMax;
-		int pliEnCours;
+		int pointsMax;					// Nombre de points nécessaires pour gagner le jeu
+		int pliEnCours;					// numéro du pli en cours
 
 		//attributs pour les échanges avec le serveur
 		Server * s;
@@ -46,7 +46,7 @@ class Belotte {
 	public:
 
 		//constructeur
-		Belotte(int pointsMax);
+		Belotte(int pointsMax);					// Constructeur
 
 		//methodes d'acces aux attibuts
 		void setAtout(Couleur atout);
