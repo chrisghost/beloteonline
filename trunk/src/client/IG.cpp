@@ -1,6 +1,28 @@
 #include "IG.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 IG::IG() {
+
+    sf::RenderWindow App(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32), "SFML Graphics");
+	const sf::Input& Input = App.GetInput();
+
+    sf::Sprite fond;
+    sf::Image back;
+    back.LoadFromFile("images/fond.png");
+    fond.SetImage(back);
+
+	App.SetFramerateLimit(60);
+
+	while (App.IsOpened())
+	{
+
+
+	App.Draw(fond);
+	App.Display();
+	}
 
 }
 
