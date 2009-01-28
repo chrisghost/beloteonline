@@ -59,7 +59,6 @@ bool Belotte::verifCarte(Carte carte) {
 		else
 		{
 			Joueur joueur = unJoueur(carte.getJoueur());
-			if(joueur.getId() == NULL){cout << "Erreur" << endl; return false;} //au cas ou
 			if(joueur.getMain()->aLaCouleur(plis[pliEnCours].getCouleur())) //si le joueur a la couleur demandee il doit en jouer
 				return false;
 			else
@@ -88,7 +87,11 @@ Carte Belotte::plusHaute(vector<Carte> cartes) {
 				plusHaute = cartes[i];
 		}
 		return plusHaute;
-
+	}
+	else { //pour régler pb compilation (bj)
+		cout << "Erreur, vecteur de cartes vide dans la méthode plusHaute de Belotte" << endl;
+		Carte c (zero, rien, this);
+		return (c);
 	}
 }
 
@@ -109,10 +112,10 @@ void Belotte::ajouterEquipe(Equipe * equipe) {
 Joueur Belotte::unJoueur(int id) {
 	if(equipes.size() == 2) //au cas ou
 	{
-		if(equipes[1]->unJoueur(id).getId() != NULL) //si le joueur est dans la premiere equipe c'est termine
-			return equipes[1]->unJoueur(id);
+		if(equipes[1]->unJoueur(id) != NULL) //si le joueur est dans la premiere equipe c'est termine
+			return *equipes[1]->unJoueur(id);
 		else
-			return equipes[2]->unJoueur(id); //sinon on retourne le resultat de la recherche
+			return *equipes[2]->unJoueur(id); //sinon on retourne le resultat de la recherche
 	}
 	else{
 		Equipe e(-1,false);
@@ -128,7 +131,7 @@ void Belotte::finMene() {
 	int ptsE1 = 0;
 	int ptsE2 = 0;
 	Equipe * E1 = Belotte::unJoueur(i->gagnant()).getEquipe();
-	Equipe * E2 = Belotte::unJoueur(i->gagnant()).getEquipe(); // ligne absurde pour éviter les erreurs de compilation (adrien)
+	Equipe * E2 = NULL; // ligne absurde pour éviter les erreurs de compilation (adrien)
 	ptsE1 = ptsE1 + i->calcul_points();
 	i++;
 	while(i != plis.end()) {
