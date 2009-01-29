@@ -20,9 +20,9 @@ using namespace std;
 
 struct packet_client // Structure pour les transferts de données depuis le client vers le serveur
 {
-	int id;
+	sf::Int32 id;
 	string log;					//1
-	int id_j;					//2,3,4
+	sf::Int32 id_j;					//2,3,4
 	enum Valeur val;			//2
 	enum Couleur couleur;		//2
 	bool reponse;				//3

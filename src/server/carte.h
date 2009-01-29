@@ -7,9 +7,9 @@ class Belotte;
 #include "deftype.h"
 
 #include <stdlib.h>
-#include <string>
+//#include <string>
 #include <iostream>
-
+using namespace std ;
 class Carte {
 private:
 	Valeur val;
@@ -27,6 +27,7 @@ public:
 	Valeur getValeur();
 	int getJoueur();
 	void setJoueur(int id);
+	string getFichierImage();
 
 	//operateurs
 	bool operator<(Carte c);

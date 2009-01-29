@@ -16,7 +16,7 @@ class Client;
 /*
  *
  */
-int main() {
+int main2() {
 
 	Client c(1234);
     return (EXIT_SUCCESS);
