@@ -1,12 +1,11 @@
-#include "IG.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+/*
+#include "IG2.h"
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
 IG::IG() {
-/*
-    sf::RenderWindow App(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32), "SFML Graphics");
+
+    sf::RenderWindow App(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32), "Belote Online");
 	const sf::Input& Input = App.GetInput();
 
     sf::Sprite fond;
@@ -16,14 +15,14 @@ IG::IG() {
 
 	App.SetFramerateLimit(60);
 
+	App.Draw(fond);
 	while (App.IsOpened())
 	{
 
 
-	//App.Draw(fond);
 	App.Display();
 	}
-*/
+
 }
 
 
@@ -52,21 +51,31 @@ Carte IG::demande_Carte(vector<Carte> main){
 }
 
 void IG::afficher_Carte(Carte c){
-
-	cout << "La Carte du joueur ";
-	cout << c.getJoueur();
-	cout <<	" est le ";
-	cout << c.getValeur();
-	cout << " de ";
-	cout << c.getCouleur()<< endl;
-
+	sf::Image img_car;
+	img_car.LoadFromFile(c.getFichierImage());
+	sf::Sprite car;
+	car.SetImage(img_car);
+	car.Move(400,300);
 }
 
 
 void IG::afficher_message(string mess) {
+	sf::RenderWindow msg(sf::VideoMode(100, 80, 32), "Message");
+	sf::Font Arial;
+	Arial.LoadFromFile("arial.ttf");
+	sf::String Text(mess, Arial, 50);
+	while (fenetre.IsOpened())
+	{
+		sf::Event Event;
+		while (fenetre.GetEvent(Event))
+		{
+			fenetre.Draw(Text);
+			fenetre.Display();
+			if (Event.Type == sf::Event::Closed)
+				fenetre.Close();
+		}
+	}
 
-	cout << "Message: ";
-	cout << mess;
 
 }
 
@@ -134,3 +143,4 @@ void IG::afficher_joueur(Joueur j) {
 	cout << "a l'id ";
 	cout << j.getId() << endl;
 }
+*/

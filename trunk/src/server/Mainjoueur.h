@@ -5,7 +5,7 @@ class Joueur;
 #include "Joueur.h"
 
 #include <stdlib.h>
-#include <string>
+//#include <string>
 #include <iostream>
 #include <vector>
 
