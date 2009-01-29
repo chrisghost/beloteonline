@@ -1,0 +1,9 @@
+void* lancerjeu(void* argument)
+{
+	(static_cast<Belotte*>(argument))->jeu();
+	}
+
+
+
+			pthread_t jeu;
+			pthread_create(&jeu, NULL, lancerjeu, b);
