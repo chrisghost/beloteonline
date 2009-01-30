@@ -7,3 +7,9 @@ void* lancerjeu(void* argument)
 
 			pthread_t jeu;
 			pthread_create(&jeu, NULL, lancerjeu, b);
+
+
+
+
+
+MainJoueur* p_mains[4]; for (int i=0; i < 4; i++) { *p_mains[i] = MainJoueur(joueurs[i]); }
